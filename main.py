@@ -1,4 +1,4 @@
-from env.FixedLimitPoker import FixedLimitPoker
+from environment.FixedLimitPoker import FixedLimitPoker
 from bots.RandomBot import Player as RandomBot
 
 

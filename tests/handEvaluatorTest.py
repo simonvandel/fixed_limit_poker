@@ -1,6 +1,6 @@
 
-from env.Card import Card
-from env.HandEvaluator import get_winner
+from environment.Card import Card
+from environment.HandEvaluator import get_winner
 
 player1Cards = [Card('Ah'), Card('As')]
 player2Cards = [Card('3h'), Card('4h')]

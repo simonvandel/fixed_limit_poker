@@ -1,7 +1,7 @@
 
 from typing import Sequence
-from env.Constants import Action
-from env.Observation import Observation
+from environment.Constants import Action
+from environment.Observation import Observation
 
 
 class BotInterface:

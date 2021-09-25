@@ -1,7 +1,7 @@
 """Random player"""
 from bots.BotInterface import BotInterface
-from env.Constants import Action
-from env.Observation import Observation
+from environment.Constants import Action
+from environment.Observation import Observation
 import random
 from typing import Sequence
 
