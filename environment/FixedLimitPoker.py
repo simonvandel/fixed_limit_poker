@@ -74,7 +74,7 @@ class FixedLimitPoker:
                     return ([], self.getObservation(), self.getReward(player, player.active), True)
             return ([], None, 0, True)
 
-        if self.stage.SHOWDOWN:
+        if self.stage == self.stage.SHOWDOWN:
             winnerPositions = self.getWinnerPositions()
             for player in self.players:
                 if not player.isAutoPlayer():
