@@ -1,5 +1,8 @@
 from copy import deepcopy
-from unittest.result import TestResult
+from types import resolve_bases
+from environment.observers.OmnipotentObservation import OmnipotentObservation
+from environment.observers.LoggingObserver import LoggingObserver
+from environment.observers.Observer import Observer
 from libs.deuces.evaluator import Evaluator
 from libs.deuces.card import Card
 from environment.PlayerObservation import PlayerObservation
@@ -24,6 +27,7 @@ class FixedLimitPoker:
     deck: Deck
     raiseCount: int
     evaluator: Evaluator
+    observers: List[Observer]
 
     def __init__(self, players: List[Player], smallBlind=5, bigBlind=10, stackSize = 1000) -> None:
         self.players = [Player(player) for player in players]
@@ -32,6 +36,7 @@ class FixedLimitPoker:
         self.bigBlind = bigBlind
         self.stackSize = stackSize
         self.evaluator = Evaluator()
+        self.observers = [LoggingObserver]
 
     def reset(self, rotatePlayers=False, stackedDeck:List[str]=[]) -> Tuple[List[Action],Observation,int,bool]:    
         self.boardCards = []
@@ -51,9 +56,13 @@ class FixedLimitPoker:
         if len(stackedDeck) > 0:
             self.deck.cards = stackedDeck
         self.dealHands()
+        self.observeNewGame()
         if self.getCurrentPlayer().isAutoPlayer():
             action = self.getAutoPlayerMove()
-            return self.step(action) 
+            result = self.step(action)
+            winners = self.getWinnerPositions()
+            self.observeGameOver(winners)
+            return result
         return (self.actionSpace, self.getObservation(), 0, False)
     
     def rotatePlayers(self) -> None:
@@ -66,6 +75,7 @@ class FixedLimitPoker:
         self.nextPlayer(action)
         
         if self.isRoundOver():
+            self.observeNewRound()
             if len(self.activePlayerQueue) == 1:
                 self.stage = Stage.END_HIDDEN
             else:
@@ -155,6 +165,7 @@ class FixedLimitPoker:
     def executeStep(self, action:Action) -> None:
         currentPlayer = self.getCurrentPlayer()
         currentPlayer.history[self.stage].append(action)
+        self.observePlayerAction(currentPlayer, action)
         if action == Action.CHECK:
             pass
         elif action == Action.FOLD:
@@ -257,6 +268,52 @@ class FixedLimitPoker:
         self.stagePot += amount
         self.totalPot += amount
 
+    def observeNewGame(self):
+        # Don't do any work if no observers exist
+        if not self.observers:
+            return
 
+        obs = self.getOmnipotentObservation()
 
-    
+        for observer in self.observers:
+            observer.LogNewGame(obs)
+            
+    def observeNewRound(self):
+        # Don't do any work if no observers exist
+        if not self.observers:
+            return
+
+        obs = self.getOmnipotentObservation()
+
+        for observer in self.observers:
+            observer.LogNewRound(obs)
+
+    def observePlayerAction(self, player: Player, action: Action):
+        # Don't do any work if no observers exist
+        if not self.observers:
+            return
+
+        obs = self.getOmnipotentObservation()
+
+        for observer in self.observers:
+            observer.LogPlayerAction(obs, player, action)
+
+    def observeGameOver(self, winnerPositions: List[int]):
+        # Don't do any work if no observers exist
+        if not self.observers:
+            return
+
+        obs = self.getOmnipotentObservation()
+
+        for observer in self.observers:
+            observer.LogGameOver(obs, winnerPositions)
+
+    def getOmnipotentObservation(self):
+        omniObservation = OmnipotentObservation()
+        omniObservation.stage = self.stage
+        omniObservation.boardCards = list(self.boardCards)
+        omniObservation.stagePot = self.stagePot
+        omniObservation.totalPot = self.totalPot
+        omniObservation.players = list([self.getPlayerObs(player) for player in self.players])
+        omniObservation.hands = { player.bot.name: player.hand for player in self.players }
+        return omniObservation
