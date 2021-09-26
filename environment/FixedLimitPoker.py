@@ -98,9 +98,14 @@ class FixedLimitPoker:
         else:
             return wagered * -1
 
-    def getWinnerPositions(self):
+    def getWinnerPositions(self) -> List[int]:
         winnerVal = 10000
         winners = []
+
+        # Don't calculate anything if there's only one player left
+        if len(self.activePlayerQueue) == 1:
+            return list(self.activePlayerQueue)
+
         board = [Card.new(c) for c in self.boardCards]
         for i in self.activePlayerQueue:
             hand = [Card.new(c) for c in self.players[i].hand]
