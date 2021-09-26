@@ -1,4 +1,5 @@
 from copy import deepcopy
+from unittest.result import TestResult
 from libs.deuces.evaluator import Evaluator
 from libs.deuces.card import Card
 from environment.PlayerObservation import PlayerObservation
@@ -32,7 +33,7 @@ class FixedLimitPoker:
         self.stackSize = stackSize
         self.evaluator = Evaluator()
 
-    def reset(self) -> Tuple[List[Action],Observation,int,bool]:    
+    def reset(self, rotatePlayers=False, stackedDeck:List[str]=[]) -> Tuple[List[Action],Observation,int,bool]:    
         self.boardCards = []
         self.activePlayerQueue = []
         self.stage = Stage.PREFLOP
@@ -40,27 +41,30 @@ class FixedLimitPoker:
         self.stagePot = 0
         self.raiseCount = 0
         self.actionSpace = [Action.FOLD, Action.CALL, Action.RAISE]
-        self.rotatePlayers()
+        if rotatePlayers:
+            self.rotatePlayers()
         for i in range(self.numPlayers):
             self.players[i].reset(stack=self.stackSize, position=i)
             self.activePlayerQueue.append(i)
         self.postBlinds()
         self.deck = Deck()
+        if len(stackedDeck) > 0:
+            self.deck.cards = stackedDeck
         self.dealHands()
         if self.getCurrentPlayer().isAutoPlayer():
             action = self.getAutoPlayerMove()
-            self.step(action)
+            return self.step(action) 
         return (self.actionSpace, self.getObservation(), 0, False)
     
     def rotatePlayers(self) -> None:
-        self.players.append(self.players.pop())
+        self.players.append(self.players.pop(0))
 
     def step(self, action:Action) -> Tuple[List[Action],Observation,int,bool] :
         if not action in self.actionSpace:
             action = self.checkFold()
         self.executeStep(action)
         self.nextPlayer(action)
-        self.updateActionSpace()
+        
         if self.isRoundOver():
             if len(self.activePlayerQueue) == 1:
                 self.stage = Stage.END_HIDDEN
@@ -81,8 +85,9 @@ class FixedLimitPoker:
                     return ([], self.getObservation(), self.getReward(player, player.position in winnerPositions, len(winnerPositions)), True)
             return ([], None, 0, True)
         
+        self.updateActionSpace()
         if self.getCurrentPlayer().isAutoPlayer():
-            self.step(self.getAutoPlayerMove())
+            return self.step(self.getAutoPlayerMove())
         else:
             return (self.actionSpace, self.getObservation(), 0, False)
 
@@ -94,13 +99,13 @@ class FixedLimitPoker:
             return wagered * -1
 
     def getWinnerPositions(self):
-        winnerVal = 0
+        winnerVal = 10000
         winners = []
         board = [Card.new(c) for c in self.boardCards]
         for i in self.activePlayerQueue:
             hand = [Card.new(c) for c in self.players[i].hand]
             val = self.evaluator.evaluate(board, hand)
-            if val > winnerVal:
+            if val < winnerVal:
                 winnerVal = val
                 winners = [i]
             elif val == winnerVal:
@@ -137,9 +142,9 @@ class FixedLimitPoker:
 
     def nextPlayer(self, action:Action) -> None:
         if action == Action.FOLD:
-            self.activePlayerQueue.pop()
+            self.activePlayerQueue.pop(0)
         else:
-            self.activePlayerQueue.append(self.activePlayerQueue.pop())
+            self.activePlayerQueue.append(self.activePlayerQueue.pop(0))
             
 
     def executeStep(self, action:Action) -> None:
@@ -167,11 +172,15 @@ class FixedLimitPoker:
         return False
 
     def allChecked(self) -> bool:
+        bigBlindHistory = self.players[1].history[self.stage]
+        if self.stage == Stage.PREFLOP and len(bigBlindHistory) > 0 and bigBlindHistory[0] == Action.CHECK: #preflop and bigblind checked
+            return True
         for player in self.players:
             if player.active:
                 hist = player.history[self.stage]
                 if len(hist) == 0 or hist[-1] != Action.CHECK:
                     return False
+
         return True
 
     def equalContribution(self) -> bool:
@@ -180,10 +189,6 @@ class FixedLimitPoker:
             if player.active:
                 contributions.append(player.contribution)
         return len(set(contributions)) == 1
-
-    def executeCheckStep(self) -> None:
-        currentPlayer = self.getCurrentPlayer()
-        currentPlayer.history[self.stage].append(Action.CHECK)
         
     def checkFold(self) -> Action:
         if Action.CHECK in self.actionSpace:
@@ -236,11 +241,11 @@ class FixedLimitPoker:
     def postBlinds(self) -> None:
         playerSmallBlind = self.players[self.activePlayerQueue[0]]
         self.postAmount(playerSmallBlind, self.smallBlind)
-        self.activePlayerQueue.append(self.activePlayerQueue.pop())
+        self.activePlayerQueue.append(self.activePlayerQueue.pop(0))
 
         playerBigBlind = self.players[self.activePlayerQueue[0]]
         self.postAmount(playerBigBlind, self.bigBlind)
-        self.activePlayerQueue.append(self.activePlayerQueue.pop())
+        self.activePlayerQueue.append(self.activePlayerQueue.pop(0))
         
     def postAmount(self, player:Player, amount:int) -> None:
         player.postAmount(amount)
