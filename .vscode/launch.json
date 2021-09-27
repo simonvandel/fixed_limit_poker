@@ -8,8 +8,7 @@
             "name": "Python: tests",
             "type": "python",
             "request": "launch",
-            "program": "testRunner.py",
-            "console": "integratedTerminal"
+            "module": "unittest"
         },
         {
             "name": "Python: Current File",
