@@ -106,6 +106,3 @@ class TestActions(TestCase):
         self.assertEqual(0, reward)
         self.assertEqual(3, len(obs.boardCards))
         self.assertEqual(20, obs.totalPot)
-
-    def testIntentionalFailure(self):
-        self.assertFalse(True)
