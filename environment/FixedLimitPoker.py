@@ -1,5 +1,4 @@
 from copy import deepcopy
-from types import resolve_bases
 from environment.observers.OmnipotentObservation import OmnipotentObservation
 from environment.observers.LoggingObserver import LoggingObserver
 from environment.observers.Observer import Observer
@@ -60,8 +59,9 @@ class FixedLimitPoker:
         if self.getCurrentPlayer().isAutoPlayer():
             action = self.getAutoPlayerMove()
             result = self.step(action)
-            winners = self.getWinnerPositions()
-            self.observeGameOver(winners)
+            if self.stage in [Stage.SHOWDOWN, Stage.END_HIDDEN]:
+                winners = self.getWinnerPositions()
+                self.observeGameOver(winners)
             return result
         return (self.actionSpace, self.getObservation(), 0, False)
     
