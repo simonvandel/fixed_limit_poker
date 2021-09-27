@@ -1,10 +1,10 @@
 from environment.Constants import Action
-import unittest
 from environment.FixedLimitPoker import FixedLimitPoker
-from bots import EmptyBot, FoldBot, TesterBot
+from bots import EmptyBot, TesterBot
+from unittest import TestCase
 
 
-class TestActions(unittest.TestCase):
+class TestActions(TestCase):
 
     def testFold(self):
         env = FixedLimitPoker([TesterBot.Player(actions=[Action.FOLD]), EmptyBot.Player()])
