@@ -1,5 +1,4 @@
-
-rom environment.PlayerObservation import PlayerObservation
+from environment.PlayerObservation import PlayerObservation
 from environment.Constants import SUITS, Stage
 from typing import Dict, Sequence, List
 from json import dumps
