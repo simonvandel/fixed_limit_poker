@@ -11,6 +11,10 @@ class LoggingObserver(Observer):
         pass
 
     def LogNewGame(self,observation: OmnipotentObservation) -> None:
+        print()
+        print()
+        print("### NEW HAND ###")
+        print()
         print(f"{observation.players[0].name}: Post Small Blind of {observation.players[0].contribution}")
         print(f"{observation.players[1].name}: Post Big Blind of {observation.players[1].contribution}")
         print(observation)
