@@ -5,7 +5,7 @@
 - [X] Tilføj tests - Bovle
 - [ ] Lav UI - Harder
 - [ ] Hjælp til bot udvikling
-  - [ ] preflop hånd rang 
+  - [X] preflop hånd rang 
   - [ ] Bedre bot eksempler
 - [ ] Håndter multiple kampe samtidig
   - [ ] Spil N bots mod hinanden alle mod alle
