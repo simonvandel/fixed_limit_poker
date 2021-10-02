@@ -21,12 +21,12 @@ class Stage(Enum):
     END_HIDDEN = 5
 
 class HandType(Enum):
-    STRAIGHTFLUSH: 0
-    FOUROFAKIND: 1
-    FULLHOUSE: 2
-    FLUSH: 3
-    STRAIGHT: 4
-    THREEOFAKIND: 5
-    TWOPAIR: 6
-    PAIR: 7
-    HIGHCARD: 8
+    STRAIGHTFLUSH = 1
+    FOUROFAKIND = 2
+    FULLHOUSE = 3
+    FLUSH = 4
+    STRAIGHT = 5
+    THREEOFAKIND = 6
+    TWOPAIR = 7
+    PAIR = 8
+    HIGHCARD = 9
