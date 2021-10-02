@@ -21,7 +21,7 @@ class OmnipotentObservation:
         self.hands = dict()
 
     def __str__(self):
-        header = pyfancy().red(f"{self.stage:<31}").get()
+        header = pyfancy().red(f"{str(self.stage):<31}").get()
         pots_str = f"TotalPot: {self.totalPot:>3} StagePot: {self.stagePot:>3}"
         pots = pyfancy().green(pots_str).get()
 

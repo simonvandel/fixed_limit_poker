@@ -24,7 +24,7 @@ class LoggingObserver(Observer):
         print(observation)
 
     def LogPlayerAction(self, observation: OmnipotentObservation, player: Player, action: Action) -> None:
-        actionText = f"{player.bot.name}: {action}"
+        actionText = f"{player.bot.name}: {str(action)}"
         actionStr = actionText
         if action == Action.FOLD:
             actionStr = pyfancy().red(actionText).get()
