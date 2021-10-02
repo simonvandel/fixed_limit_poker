@@ -7,7 +7,7 @@ from typing import Sequence
 
 
 
-class Player(BotInterface):
+class RandomBot(BotInterface):
     """Mandatory class with the player methods"""
 
     def __init__(self, name="nc_random"):

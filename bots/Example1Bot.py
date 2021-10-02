@@ -6,14 +6,13 @@ from bots.BotInterface import BotInterface
 from utils import handValue
 
 
-class Player(BotInterface):
+class Example1Bot(BotInterface):
 
     def __init__(self, name="example1"):
         super().__init__(name=name)
         raiseCount = 0
 
-
-    def act(self, action_space:Sequence[Action], observation:Observation) -> Action:
+    def act(self, action_space: Sequence[Action], observation: Observation) -> Action:
         stage = observation.stage
         if stage == Stage.PREFLOP:
             return self.getNearestAction(self.handlePreFlop(observation), action_space)
@@ -24,7 +23,7 @@ class Player(BotInterface):
         elif stage == Stage.RIVER:
             return self.getNearestAction(self.handleRiver(observation), action_space)
 
-    def handlePreFlop(self, observation:Observation) -> Action:
+    def handlePreFlop(self, observation: Observation) -> Action:
         raiseCount = self.countRaises(observation, Stage.PREFLOP)
         handPercent = handValue.getHandPercent(observation.myHand)
         if handPercent < (40 - (10*raiseCount)):
@@ -32,38 +31,38 @@ class Player(BotInterface):
         elif handPercent < (60 - (10*raiseCount)):
             return Action.CALL
         return Action.FOLD
-        
 
-    def handleFlop(self, observation:Observation) -> Action:
+    def handleFlop(self, observation: Observation) -> Action:
         raiseCount = self.countRaises(observation, Stage.FLOP)
-        handPercent = handValue.getHandPercent(observation.myHand, observation.boardCards)
+        handPercent = handValue.getHandPercent(
+            observation.myHand, observation.boardCards)
         if handPercent <= (60 - (10*raiseCount)):
             return Action.RAISE
         elif handPercent <= (80 - (10*raiseCount)) or self.getFlushDraw(observation) or self.getStraightDraw(observation):
             return Action.CALL
         return Action.FOLD
 
-    def handleTurn(self, observation:Observation) -> Action:
+    def handleTurn(self, observation: Observation) -> Action:
         raiseCount = self.countRaises(observation, Stage.TURN)
-        handPercent = handValue.getHandPercent(observation.myHand, observation.boardCards)
+        handPercent = handValue.getHandPercent(
+            observation.myHand, observation.boardCards)
         if handPercent <= (50 - (10*raiseCount)):
             return Action.RAISE
         elif handPercent <= (70 - (10*raiseCount)) or self.getFlushDraw(observation) or self.getStraightDraw(observation):
             return Action.CALL
         return Action.FOLD
-        
-    
-    def handleRiver(self, observation:Observation) -> Action:
+
+    def handleRiver(self, observation: Observation) -> Action:
         raiseCount = self.countRaises(observation, Stage.RIVER)
-        handPercent = handValue.getHandPercent(observation.myHand, observation.boardCards)
+        handPercent = handValue.getHandPercent(
+            observation.myHand, observation.boardCards)
         if handPercent <= (40 - (10*raiseCount)):
             return Action.RAISE
         elif handPercent <= (60 - (10*raiseCount)):
             return Action.CALL
         return Action.FOLD
-        
 
-    def countRaises(self, observation:Observation, stage:Stage=None) -> int:
+    def countRaises(self, observation: Observation, stage: Stage = None) -> int:
         count = 0
         for player in observation.players:
             if not stage == None:
@@ -73,14 +72,14 @@ class Player(BotInterface):
                     count += player.history[s].count(Action.RAISE)
         return count
 
-    def getNearestAction(self, action:Action, actionSpace:Sequence[Action]) -> Action:
+    def getNearestAction(self, action: Action, actionSpace: Sequence[Action]) -> Action:
         while action not in actionSpace:
             if action.value == 0:
                 return Action.CHECK
             action = Action(action.value-1)
         return action
 
-    def getFlushDraw(self, observation:Observation):
+    def getFlushDraw(self, observation: Observation):
         suitCounts = {}
         for c in observation.myHand:
             if c[1] in suitCounts:
@@ -91,9 +90,8 @@ class Player(BotInterface):
             else:
                 suitCounts[c[1]] = 0
         return False
-        
 
-    def getStraightDraw(self, observation:Observation):
+    def getStraightDraw(self, observation: Observation):
         cardRanks = list([RANKS.index(c[0]) for c in observation.myHand])
         [cardRanks.append(RANKS.index(c[0])) for c in observation.boardCards]
         cardRanksSet = set(cardRanks)
