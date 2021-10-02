@@ -2,8 +2,8 @@ from copy import deepcopy
 from environment.observers.OmnipotentObservation import OmnipotentObservation
 from environment.observers.LoggingObserver import LoggingObserver
 from environment.observers.Observer import Observer
-from libs.deuces.evaluator import Evaluator
-from libs.deuces.card import Card
+from utils.deuces.evaluator import Evaluator
+from utils.deuces.card import Card
 from environment.PlayerObservation import PlayerObservation
 from environment.Deck import Deck
 from environment.Player import Player

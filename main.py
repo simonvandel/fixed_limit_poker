@@ -1,8 +1,8 @@
 from environment.FixedLimitPoker import FixedLimitPoker
 from bots.RandomBot import Player as RandomBot
-from libs.utils.preFlopRank import getRankPercent
+from utils.handValue import getHandType
 
-res = getRankPercent(['As', 'Ac'])
+res = getHandType(['As', 'Ac'])
 
 env = FixedLimitPoker([RandomBot("player1"), RandomBot("player2")])
 env.reset()
