@@ -6,6 +6,7 @@
 - [ ] Lav UI - Harder
 - [ ] Hjælp til bot udvikling
   - [X] preflop hånd rang 
+  - [X] postflop hånd rang
   - [ ] Bedre bot eksempler
 - [ ] Håndter multiple kampe samtidig
   - [ ] Spil N bots mod hinanden alle mod alle
