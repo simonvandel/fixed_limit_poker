@@ -1,0 +1,64 @@
+<html>
+
+<head>
+    <script type='text/javascript' src='web_sockets_example.js'></script>
+    <meta charset="UTF-8">
+    <style>
+        .main {
+            width: 100%;
+            margin-left: 20px;
+        }
+
+        .actions {
+            margin: 0 auto;
+            border: 1em gray;
+        }
+
+        h1 {
+            font-family: sans-serif;
+            font-size: 32px;
+            color: #CCC;
+            padding: 5px;
+            margin: 5px;
+        }
+
+        ul {
+            padding: 0;
+            width: 95%;
+            padding: 5px;
+            margin: 10px;
+            max-height: 500px;
+            overflow: auto;
+
+        }
+
+        li {
+            font-family: sans-serif;
+            background-color: white;
+            float: left;
+            clear: both;
+            padding: 5px;
+            list-style-type: none;
+            margin: 10px;
+            border-radius: 5px;
+            bottom: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <div class="main">
+            <div id="actions" class="actions">
+                <div>
+                    <h1>Actions</h1>
+                    <div id="action-list">
+                        <ul></ul>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+</body>
+
+</html>

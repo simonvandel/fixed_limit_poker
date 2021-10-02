@@ -37,14 +37,14 @@ class LoggingObserver(Observer):
         else:
             print("Unexpected!")
 
-        
-        print(f"{actionStr} | {self.getPotsStr(observation)}")
+        print(f"{actionStr:<40} | {self.getPotsStr(observation)}")
 
-    def LogGameOver(self,observation: OmnipotentObservation) -> None:
+    def LogGameOver(self, observation: OmnipotentObservation) -> None:
         for player in observation.players:
             if player.win:
-                pyfancy().green(f"Winner: {player.name} | Amount: {player.reward}").output()
+                pyfancy().green(
+                    f"Winner: {player.name} | Amount: {player.reward}").output()
 
-    def getPotsStr(self, observation:OmnipotentObservation) -> str:
+    def getPotsStr(self, observation: OmnipotentObservation) -> str:
         pots_str = f"TotalPot: {observation.totalPot:>3} StagePot: {observation.stagePot:>3}"
         return pyfancy().green(pots_str).get()
