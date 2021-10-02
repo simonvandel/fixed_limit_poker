@@ -4,16 +4,21 @@ from bots.Example1Bot import Player as ExampleBot
 from environment.observers.LoggingObserver import LoggingObserver
 from environment.observers.WebsocketsObserver import WebsocketsObserver
 
+ENABLE_WEBSOCKETS = False
+
 
 async def main():
-    obs = WebsocketsObserver()
+    observers = [LoggingObserver()]
+    if ENABLE_WEBSOCKETS:
+        observers.append(WebsocketsObserver())
     env = FixedLimitPoker(
-        [ExampleBot("player1"), ExampleBot("player2")], observers=[obs, LoggingObserver()])
+        [ExampleBot("player1"), ExampleBot("player2")], observers=observers)
     env.reset()
     env.reset(rotatePlayers=True)
     env.reset(rotatePlayers=True)
     env.reset(rotatePlayers=True)
     env.reset(rotatePlayers=True)
-    obs.run_to_completion()
+    if ENABLE_WEBSOCKETS:
+        observers[-1].run_to_completion()
 
 asyncio.run(main())
