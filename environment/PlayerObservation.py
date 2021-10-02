@@ -8,6 +8,8 @@ class PlayerObservation:
     contribution: int
     position: int
     active: bool 
+    win: bool
+    reward: int
     history: Dict[Stage, Sequence[Action]]
 
     def __init__(self) -> None:
@@ -16,6 +18,8 @@ class PlayerObservation:
         self.contribution = 0
         self.position = -1
         self.active = True
+        self.win = False
+        self.reward = 0
         self.history = {}
         for stage in Stage:
             self.history[stage] = []

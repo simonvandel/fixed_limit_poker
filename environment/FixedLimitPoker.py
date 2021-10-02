@@ -35,7 +35,7 @@ class FixedLimitPoker:
         self.bigBlind = bigBlind
         self.stackSize = stackSize
         self.evaluator = Evaluator()
-        self.observers = [LoggingObserver]
+        self.observers = [LoggingObserver()]
 
     def reset(self, rotatePlayers=False, stackedDeck:List[str]=[]) -> Tuple[List[Action],Observation,int,bool]:    
         self.boardCards = []
@@ -59,9 +59,6 @@ class FixedLimitPoker:
         if self.getCurrentPlayer().isAutoPlayer():
             action = self.getAutoPlayerMove()
             result = self.step(action)
-            if self.stage in [Stage.SHOWDOWN, Stage.END_HIDDEN]:
-                winners = self.getWinnerPositions()
-                self.observeGameOver(winners)
             return result
         return (self.actionSpace, self.getObservation(), 0, False)
     
@@ -75,31 +72,33 @@ class FixedLimitPoker:
         self.nextPlayer(action)
         
         if self.isRoundOver():
-            self.observeNewRound()
+            
             if len(self.activePlayerQueue) == 1:
                 self.stage = Stage.END_HIDDEN
             else:
                 self.stage = Stage(self.stage.value+1)
             self.newRound()
+            self.observeNewRound()
         
-        if self.stage == Stage.END_HIDDEN:
-            for player in self.players:
-                if not player.isAutoPlayer():
-                    return ([], self.getObservation(), self.getReward(player, player.active), True)
-            return ([], None, 0, True)
-
-        if self.stage == self.stage.SHOWDOWN:
+        if self.stage == Stage.END_HIDDEN or self.stage == Stage.SHOWDOWN:
             winnerPositions = self.getWinnerPositions()
+            self.giveRewards(winnerPositions)
+            self.observeGameOver(winnerPositions)
             for player in self.players:
                 if not player.isAutoPlayer():
-                    return ([], self.getObservation(), self.getReward(player, player.position in winnerPositions, len(winnerPositions)), True)
+                    return ([], self.getObservation(), player.reward, True)
             return ([], None, 0, True)
-        
+            
         self.updateActionSpace()
         if self.getCurrentPlayer().isAutoPlayer():
             return self.step(self.getAutoPlayerMove())
         else:
             return (self.actionSpace, self.getObservation(), 0, False)
+
+    def giveRewards(self, winnerPositions: List[int]):
+        for player in self.players:
+            player.win = player.position in winnerPositions
+            player.reward = self.getReward(player, player.win, len(winnerPositions))
 
     def getReward(self, player:Player, win:bool, numWinners:int = 1):
         wagered = (self.stackSize - player.stack)
@@ -165,16 +164,18 @@ class FixedLimitPoker:
     def executeStep(self, action:Action) -> None:
         currentPlayer = self.getCurrentPlayer()
         currentPlayer.history[self.stage].append(action)
-        self.observePlayerAction(currentPlayer, action)
         if action == Action.CHECK:
             pass
         elif action == Action.FOLD:
             currentPlayer.active = False
         elif action == Action.CALL:
-            self.postAmount(currentPlayer, self.getCallAmount())
+            amount = self.getCallAmount()
+            self.postAmount(currentPlayer, amount)
         elif action == Action.RAISE:
             self.raiseCount += 1
-            self.postAmount(currentPlayer, min(self.getCallAmount() + self.getRaiseAmount(), currentPlayer.stack))
+            amount = min(self.getCallAmount() + self.getRaiseAmount(), currentPlayer.stack)
+            self.postAmount(currentPlayer, amount)
+        self.observePlayerAction(currentPlayer, action)
 
     def isRoundOver(self):
         if len(self.activePlayerQueue) == 1:
@@ -234,6 +235,8 @@ class FixedLimitPoker:
         playerObs.name = player.bot.name
         playerObs.position = player.position
         playerObs.history =  deepcopy(player.history)
+        playerObs.reward = player.reward
+        playerObs.win = player.win
         return playerObs
 
         
@@ -306,7 +309,7 @@ class FixedLimitPoker:
         obs = self.getOmnipotentObservation()
 
         for observer in self.observers:
-            observer.LogGameOver(obs, winnerPositions)
+            observer.LogGameOver(obs)
 
     def getOmnipotentObservation(self):
         omniObservation = OmnipotentObservation()

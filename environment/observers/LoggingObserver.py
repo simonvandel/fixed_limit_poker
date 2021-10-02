@@ -10,25 +10,37 @@ class LoggingObserver(Observer):
     def __init__(self) -> None:
         pass
 
-    def LogNewGame(observation: OmnipotentObservation) -> None:
+    def LogNewGame(self,observation: OmnipotentObservation) -> None:
+        print(f"{observation.players[0].name}: Post Small Blind of {observation.players[0].contribution}")
+        print(f"{observation.players[1].name}: Post Big Blind of {observation.players[1].contribution}")
+        print(observation)
+        
+
+    def LogNewRound(self,observation: OmnipotentObservation) -> None:
         print(observation)
 
-    def LogNewRound(observation: OmnipotentObservation) -> None:
-        print(observation)
-
-    def LogPlayerAction(observation: OmnipotentObservation, player: Player, action: Action) -> None:
-        text = f"{player.bot.name}: {action}"
+    def LogPlayerAction(self, observation: OmnipotentObservation, player: Player, action: Action) -> None:
+        actionText = f"{player.bot.name}: {action}"
+        actionStr = actionText
         if action == Action.FOLD:
-            pyfancy().red(text).output()
+            actionStr = pyfancy().red(actionText).get()
         elif action == Action.CALL:
-            pyfancy().yellow(text).output()
+            actionStr = pyfancy().yellow(actionText + " " + str(player.contribution)).get()
         elif action == Action.RAISE:
-            pyfancy().cyan(text).output()
+            actionStr = pyfancy().cyan(actionText + " to " + str(player.contribution)).get()
         elif action == Action.CHECK:
-            pyfancy().green(text).output()
+            actionStr = pyfancy().green(actionText).get()
         else:
             print("Unexpected!")
 
-    def LogGameOver(observation: OmnipotentObservation, winnerPositions: List[int]) -> None:
-        for i in winnerPositions:
-            pyfancy().green(f"Winner: {observation.players[i].name}").output()
+        
+        print(f"{actionStr} | {self.getPotsStr(observation)}")
+
+    def LogGameOver(self,observation: OmnipotentObservation) -> None:
+        for player in observation.players:
+            if player.win:
+                pyfancy().green(f"Winner: {player.name} | Amount: {player.reward}").output()
+
+    def getPotsStr(self, observation:OmnipotentObservation) -> str:
+        pots_str = f"TotalPot: {observation.totalPot:>3} StagePot: {observation.stagePot:>3}"
+        return pyfancy().green(pots_str).get()

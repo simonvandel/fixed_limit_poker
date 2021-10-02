@@ -9,6 +9,8 @@ class Player:
     contribution: int
     position: int
     active: bool 
+    win: bool
+    reward: int
     history: Dict[Stage, List[Action]]
     hand: Sequence[str]
 
@@ -24,6 +26,8 @@ class Player:
         self.active = True
         self.hand = []
         self.history = {}
+        self.win = False
+        self.reward = 0
         for stage in Stage:
             self.history[stage] = []
 

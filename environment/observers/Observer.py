@@ -17,5 +17,5 @@ class Observer:
     def LogPlayerAction(observation: OmnipotentObservation, player: Player, action: Action) -> None:
         pass
 
-    def LogGameOver(observation: OmnipotentObservation, winnerPositions: List[int]) -> None:
+    def LogGameOver(observation: OmnipotentObservation) -> None:
         pass
