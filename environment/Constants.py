@@ -1,9 +1,10 @@
-from enum import Enum
+
+from enum import IntEnum
 
 RANKS = '23456789TJQKA'
 SUITS = 'dchs' # '2h'
 
-class Action(Enum):
+class Action(IntEnum):
     """Allowed actions"""
     FOLD = 0
     CHECK = 1
@@ -12,7 +13,7 @@ class Action(Enum):
     SMALL_BLIND = 4
     BIG_BLIND = 5
     
-class Stage(Enum):
+class Stage(IntEnum):
     PREFLOP = 0
     FLOP = 1
     TURN = 2
@@ -20,7 +21,7 @@ class Stage(Enum):
     SHOWDOWN = 4
     END_HIDDEN = 5
 
-class HandType(Enum):
+class HandType(IntEnum):
     STRAIGHTFLUSH = 1
     FOUROFAKIND = 2
     FULLHOUSE = 3
