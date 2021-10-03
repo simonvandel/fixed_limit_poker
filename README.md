@@ -15,3 +15,10 @@
 Nice to have:
 
 - [ ] løbende turneringer
+
+
+
+
+
+Challenge:
+ - Much faster (10x) with pypy3 (https://www.pypy.org/download.html)

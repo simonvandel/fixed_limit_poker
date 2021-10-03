@@ -4,6 +4,7 @@ from environment.observers.WebsocketsObserver import WebsocketsObserver
 from bots import Example1Bot, MirrorBot, RandomBot, CallBot, FoldBot
 import itertools
 import math
+import time
 
 PARTICIPANTS = [Example1Bot(), MirrorBot(), RandomBot(), CallBot(), FoldBot()]
 TOTAL_ROUNDS = 1000
@@ -18,7 +19,8 @@ def main():
 
     poker_rooms = [FixedLimitPoker(c) for c in combinations]
     stats = dict()
-
+    
+    start_time = time.time()
     for room in poker_rooms:
         print(f"Pairing {', '.join([p.bot.name for p in room.players])}")
         for _ in range(rounds_for_each_pair):
@@ -29,6 +31,9 @@ def main():
                 stats[p.bot.name] += p.reward
 
         print(stats)
-
+    
+    duration = time.time() - start_time
+    print(f"Simulation took {round(duration/(rounds_for_each_pair * len(combinations)), 5)} seconds pr. round")
+    print(f"--- {round(duration, 2)} seconds ---")
 
 main()
