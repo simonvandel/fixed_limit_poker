@@ -54,7 +54,7 @@ if __name__ == "__main__":
 
     results_dir = "./results/"
     onlyfiles = [join(results_dir, f)
-                 for f in listdir(results_dir) if isfile(join(results_dir, f))]
+                 for f in listdir(results_dir) if isfile(join(results_dir, f)) and f.endswith(".pckl")]
 
     for fp in onlyfiles:
         with open(fp, "rb") as f:
