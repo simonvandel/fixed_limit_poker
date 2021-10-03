@@ -1,7 +1,7 @@
-
-from environment.PlayerObservation import PlayerObservation
-from environment.Constants import Stage
 from typing import Sequence
+
+from environment.Constants import Stage
+from environment.PlayerObservation import PlayerObservation
 
 
 class Observation:

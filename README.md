@@ -22,3 +22,7 @@ Nice to have:
 
 Challenge:
  - Much faster (10x) with pypy3 (https://www.pypy.org/download.html)
+
+
+Sort dependencies:
+ - `isort -l 120 bots environment utils main.py read_results.py challenge.py`

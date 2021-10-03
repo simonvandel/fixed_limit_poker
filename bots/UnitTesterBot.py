@@ -1,8 +1,9 @@
 """unit test player"""
-from environment.Observation import Observation
-from environment import Constants
 from typing import List, Sequence
+
 from bots.BotInterface import BotInterface
+from environment import Constants
+from environment.Observation import Observation
 
 
 class UnitTesterBot(BotInterface):

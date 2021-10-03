@@ -12,6 +12,7 @@ for hand in list:
     res[hand] = (count/1326)*100
 
 import pickle
+
 dbfile = open("./utils/preflopHandRankings.pckl", 'ab')
 pickle.dump(res, dbfile)
 dbfile.close()

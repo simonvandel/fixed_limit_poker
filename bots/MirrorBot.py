@@ -1,9 +1,10 @@
 """This bot mirrors the actions of the opponent"""
-from environment.Observation import Observation
-from environment.Constants import Action
-from typing import Sequence
-from bots.BotInterface import BotInterface
 import itertools
+from typing import Sequence
+
+from bots.BotInterface import BotInterface
+from environment.Constants import Action
+from environment.Observation import Observation
 
 
 class MirrorBot(BotInterface):

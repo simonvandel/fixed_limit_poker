@@ -1,12 +1,12 @@
 import asyncio
-import threading
 import json
-from environment.observers.Observer import Observer
-from environment.Constants import Action
-from environment import Player
-from environment.observers.OmnipotentObservation import OmnipotentObservation, OmnipotentObservationEncoder
-import websockets
+import threading
 import time
+
+import websockets
+
+from environment import Action, Player
+from environment.observers import Observer, OmnipotentObservation, OmnipotentObservationEncoder
 
 
 class WebsocketsObserver(Observer):

@@ -1,5 +1,6 @@
 """empty bot player"""
 from typing import Sequence
+
 from bots.BotInterface import BotInterface
 
 

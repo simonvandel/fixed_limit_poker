@@ -1,10 +1,10 @@
 """Random player"""
-from bots.BotInterface import BotInterface
-from environment.Constants import Action
-from environment.Observation import Observation
 import random
 from typing import Sequence
 
+from bots.BotInterface import BotInterface
+from environment.Constants import Action
+from environment.Observation import Observation
 
 
 class RandomBot(BotInterface):

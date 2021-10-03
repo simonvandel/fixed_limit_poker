@@ -1,6 +1,6 @@
+from typing import Dict, List
 
 from environment.Constants import Action, Stage
-from typing import Dict, List
 
 
 class PlayerObservation:

@@ -1,7 +1,8 @@
 """Call player"""
-from environment import Observation, Constants
 from typing import Sequence
+
 from bots.BotInterface import BotInterface
+from environment import Constants, Observation
 
 
 class CallBot(BotInterface):

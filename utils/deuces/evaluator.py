@@ -1,7 +1,9 @@
 import itertools
+
 from .card import Card
 from .deck import Deck
 from .lookup import LookupTable
+
 
 class Evaluator(object):
     """

@@ -1,8 +1,11 @@
-from environment.PlayerObservation import PlayerObservation
-from environment.Constants import Stage
-from typing import Dict, Sequence, List
-from pyfancy.pyfancy import pyfancy
 from json import JSONEncoder
+from typing import Dict, List, Sequence
+
+from pyfancy.pyfancy import pyfancy
+
+from environment.Constants import Stage
+from environment.PlayerObservation import PlayerObservation
+
 
 class OmnipotentObservation:
     boardCards: List[str]

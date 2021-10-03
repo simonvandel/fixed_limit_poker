@@ -1,8 +1,9 @@
 import asyncio
+
+from bots import Example1Bot
 from environment.FixedLimitPoker import FixedLimitPoker
 from environment.observers.LoggingObserver import LoggingObserver
 from environment.observers.WebsocketsObserver import WebsocketsObserver
-from bots import Example1Bot
 
 ENABLE_WEBSOCKETS = False
 

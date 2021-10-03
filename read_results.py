@@ -1,15 +1,15 @@
-from asyncio.tasks import sleep
-import pickle
+import asyncio
 import json
-from os import listdir
-from os.path import isfile, join
+import pickle
 import threading
 import time
-from watchdog.observers import Observer
-from watchdog.events import PatternMatchingEventHandler
+from asyncio.tasks import sleep
+from os import listdir
+from os.path import isfile, join
 
-import asyncio
 import websockets
+from watchdog.events import PatternMatchingEventHandler
+from watchdog.observers import Observer
 
 
 class WebsocketWorker(threading.Thread):

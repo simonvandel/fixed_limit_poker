@@ -1,15 +1,16 @@
-from collections import defaultdict
-from json.encoder import JSONEncoder
+import itertools
+import json
+import math
+import multiprocessing as mp
 import pickle
 import queue
-from typing import Dict
-from environment.FixedLimitPoker import FixedLimitPoker
-from bots import Example1Bot, MirrorBot, RandomBot, CallBot, FoldBot
-import itertools
-import math
 import time
-import json
-import multiprocessing as mp
+from collections import defaultdict
+from json.encoder import JSONEncoder
+from typing import Dict
+
+from bots import CallBot, Example1Bot, FoldBot, MirrorBot, RandomBot
+from environment.FixedLimitPoker import FixedLimitPoker
 
 PARTICIPANTS = [Example1Bot("player1"), Example1Bot("player2"), Example1Bot(
     "player3"), Example1Bot("player4"), Example1Bot("player5")]

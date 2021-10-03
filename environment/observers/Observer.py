@@ -1,7 +1,8 @@
 from typing import List
+
 from environment.Constants import Action
-from environment.Player import Player
 from environment.observers.OmnipotentObservation import OmnipotentObservation
+from environment.Player import Player
 
 
 class Observer:

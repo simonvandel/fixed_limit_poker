@@ -1,6 +1,8 @@
 from random import shuffle as rshuffle
 from typing import Sequence
+
 from environment.Constants import RANKS, SUITS
+
 
 class Deck:
     

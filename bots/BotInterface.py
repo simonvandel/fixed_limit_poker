@@ -1,5 +1,6 @@
 
 from typing import Sequence
+
 from environment.Constants import Action
 from environment.Observation import Observation
 

@@ -1,8 +1,9 @@
 """Example1 player"""
-from environment.Observation import Observation
-from environment.Constants import Action, HandType, Stage, RANKS
 from typing import Dict, Sequence
+
 from bots.BotInterface import BotInterface
+from environment.Constants import RANKS, Action, HandType, Stage
+from environment.Observation import Observation
 from utils.handValue import getHandPercent, getHandType
 
 

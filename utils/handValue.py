@@ -1,8 +1,10 @@
-from typing import List, Sequence
 import pickle
-from environment.Constants import HandType, RANKS
+from typing import List, Sequence
+
+from environment.Constants import RANKS, HandType
 from utils.deuces.card import Card
 from utils.deuces.evaluator import Evaluator
+
 
 def _getPreflopHandType(hand: Sequence[str]) -> str:
     hand = sorted(hand, key=lambda x: RANKS.index(x[0]), reverse=True)

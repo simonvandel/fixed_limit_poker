@@ -1,7 +1,8 @@
 """Fold player"""
-from environment import Observation, Action
 from typing import Sequence
+
 from bots.BotInterface import BotInterface
+from environment import Action, Observation
 
 
 class FoldBot(BotInterface):

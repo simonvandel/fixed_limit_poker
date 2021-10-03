@@ -1,9 +1,11 @@
 from typing import List
+
 from pyfancy.pyfancy import pyfancy
+
 from environment import Player
-from environment.observers.OmnipotentObservation import OmnipotentObservation
-from environment.observers.Observer import Observer
 from environment.Constants import Action
+from environment.observers.Observer import Observer
+from environment.observers.OmnipotentObservation import OmnipotentObservation
 
 
 class LoggingObserver(Observer):
