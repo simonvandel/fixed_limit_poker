@@ -8,14 +8,14 @@ class Observer:
     def __init__(self) -> None:
         pass
 
-    def LogNewGame(observation: OmnipotentObservation) -> None:
+    def LogNewGame(self, observation: OmnipotentObservation) -> None:
         pass
 
-    def LogNewRound(observation: OmnipotentObservation) -> None:
+    def LogNewRound(self, observation: OmnipotentObservation) -> None:
         pass
 
-    def LogPlayerAction(observation: OmnipotentObservation, player: Player, action: Action) -> None:
+    def LogPlayerAction(self, observation: OmnipotentObservation, player: Player, action: Action) -> None:
         pass
 
-    def LogGameOver(observation: OmnipotentObservation) -> None:
+    def LogGameOver(self, observation: OmnipotentObservation) -> None:
         pass

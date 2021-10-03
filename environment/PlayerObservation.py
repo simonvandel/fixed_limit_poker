@@ -1,16 +1,17 @@
 
 from environment.Constants import Action, Stage
-from typing import Dict, Sequence, Tuple
+from typing import Dict, List
+
 
 class PlayerObservation:
     name: str
     stack: int
     contribution: int
     position: int
-    active: bool 
+    active: bool
     win: bool
     reward: int
-    history: Dict[Stage, Sequence[Action]]
+    history: Dict[Stage, List[Action]]
 
     def __init__(self) -> None:
         self.name = ""

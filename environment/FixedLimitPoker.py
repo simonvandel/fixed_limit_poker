@@ -1,6 +1,7 @@
 from copy import deepcopy
-from environment.observers.OmnipotentObservation import OmnipotentObservation
-from environment.observers.Observer import Observer
+from bots.BotInterface import BotInterface
+from environment.observers import OmnipotentObservation
+from environment.observers import Observer
 from utils.deuces.evaluator import Evaluator
 from utils.deuces.card import Card
 from environment.PlayerObservation import PlayerObservation
@@ -27,7 +28,7 @@ class FixedLimitPoker:
     evaluator: Evaluator
     observers: List[Observer]
 
-    def __init__(self, players: List[Player], smallBlind=5, bigBlind=10, stackSize = 1000, observers=[]):
+    def __init__(self, players: List[BotInterface], smallBlind=5, bigBlind=10, stackSize = 1000, observers=[]):
         self.players = [Player(player) for player in players]
         self.numPlayers = len(self.players)
         self.smallBlind = smallBlind

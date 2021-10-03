@@ -10,7 +10,7 @@ import time
 
 
 class WebsocketsObserver(Observer):
-    queue_to_send = asyncio.Queue()
+    queue_to_send: asyncio.Queue = asyncio.Queue()
     active = False
     thread = None
     websocket = None

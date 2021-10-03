@@ -1,10 +1,10 @@
-from typing import List
+from typing import List, Sequence
 import pickle
 from environment.Constants import HandType, RANKS
 from utils.deuces.card import Card
 from utils.deuces.evaluator import Evaluator
 
-def _getPreflopHandType(hand: List[str]) -> str:
+def _getPreflopHandType(hand: Sequence[str]) -> str:
     hand = sorted(hand, key=lambda x: RANKS.index(x[0]), reverse=True)
 
     if hand[0][0] == hand[1][0]:
@@ -14,7 +14,7 @@ def _getPreflopHandType(hand: List[str]) -> str:
     else:
         return hand[0][0] + hand[1][0] + 'o'
 
-def getHandPercent(hand: List[str], board: List[str] = []) -> float:
+def getHandPercent(hand: Sequence[str], board: Sequence[str] = []) -> float:
     if len(board) == 0:
         with open('./utils/preflopHandRankings.pckl', 'rb') as rankingsFile:
             rankings = pickle.load(rankingsFile)

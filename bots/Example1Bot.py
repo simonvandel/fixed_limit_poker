@@ -1,9 +1,9 @@
 """Example1 player"""
 from environment.Observation import Observation
 from environment.Constants import Action, HandType, Stage, RANKS
-from typing import Sequence
+from typing import Dict, Sequence
 from bots.BotInterface import BotInterface
-from utils import handValue
+from utils.handValue import getHandPercent, getHandType
 
 
 class Example1Bot(BotInterface):
@@ -22,10 +22,13 @@ class Example1Bot(BotInterface):
             return self.getNearestAction(self.handleTurn(observation), action_space)
         elif stage == Stage.RIVER:
             return self.getNearestAction(self.handleRiver(observation), action_space)
+        
+        # Unexpected!
+        return Action.FOLD
 
     def handlePreFlop(self, observation: Observation) -> Action:
         raiseCount = self.countRaises(observation, Stage.PREFLOP)
-        handPercent = handValue.getHandPercent(observation.myHand)
+        handPercent = getHandPercent(observation.myHand)
         if handPercent < (40 - (10*raiseCount)):
             return Action.RAISE
         elif handPercent < (60 - (10*raiseCount)):
@@ -34,7 +37,7 @@ class Example1Bot(BotInterface):
 
     def handleFlop(self, observation: Observation) -> Action:
         raiseCount = self.countRaises(observation, Stage.FLOP)
-        handPercent = handValue.getHandPercent(
+        handPercent = getHandPercent(
             observation.myHand, observation.boardCards)
         if handPercent <= (60 - (10*raiseCount)):
             return Action.RAISE
@@ -44,7 +47,7 @@ class Example1Bot(BotInterface):
 
     def handleTurn(self, observation: Observation) -> Action:
         raiseCount = self.countRaises(observation, Stage.TURN)
-        handPercent = handValue.getHandPercent(
+        handPercent = getHandPercent(
             observation.myHand, observation.boardCards)
         if handPercent <= (50 - (10*raiseCount)):
             return Action.RAISE
@@ -54,7 +57,7 @@ class Example1Bot(BotInterface):
 
     def handleRiver(self, observation: Observation) -> Action:
         raiseCount = self.countRaises(observation, Stage.RIVER)
-        handPercent = handValue.getHandPercent(
+        handPercent = getHandPercent(
             observation.myHand, observation.boardCards)
         if handPercent <= (40 - (10*raiseCount)):
             return Action.RAISE
@@ -65,7 +68,7 @@ class Example1Bot(BotInterface):
     def countRaises(self, observation: Observation, stage: Stage = None) -> int:
         count = 0
         for player in observation.players:
-            if not stage == None:
+            if stage is not None:
                 count += player.history[stage].count(Action.RAISE)
             else:
                 for s in Stage:
@@ -80,7 +83,7 @@ class Example1Bot(BotInterface):
         return action
 
     def getFlushDraw(self, observation: Observation):
-        suitCounts = {}
+        suitCounts: Dict[str, int] = {}
         for c in observation.myHand:
             if c[1] in suitCounts:
                 suitCounts[c[1]] += 1
@@ -92,10 +95,8 @@ class Example1Bot(BotInterface):
         return False
 
     def getStraightDraw(self, observation: Observation):
-        cardRanks = list([RANKS.index(c[0]) for c in observation.myHand])
-        [cardRanks.append(RANKS.index(c[0])) for c in observation.boardCards]
-        cardRanksSet = set(cardRanks)
-        cardRanksSet = sorted(cardRanksSet)
+        cardRanks = [RANKS.index(c[0]) for c in list(observation.myHand) + list(observation.boardCards)]
+        cardRanksSet = sorted(set(cardRanks))
         if len(cardRanksSet) < 4:
             return False
         for i in range(len(cardRanksSet)-3):

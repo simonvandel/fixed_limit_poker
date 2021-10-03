@@ -25,6 +25,6 @@ class MirrorBot(BotInterface):
         elif last_action in action_space:
             # repeat action if allowed
             return last_action
-        else:
-            # We cannot do the same, so we fold
-            return Action.FOLD
+
+        # We cannot do the same, so we fold
+        return Action.FOLD

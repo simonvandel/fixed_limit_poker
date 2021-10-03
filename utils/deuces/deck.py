@@ -1,4 +1,5 @@
 from random import shuffle as rshuffle
+from typing import List
 from .card import Card
 
 
@@ -8,7 +9,7 @@ class Deck:
     deck with the list of unique card integers. Each object instantiated simply
     makes a copy of this object and shuffles it. 
     """
-    _FULL_DECK = []
+    _FULL_DECK: List[Card] = []
 
     def __init__(self):
         self.shuffle()
