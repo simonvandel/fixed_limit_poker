@@ -10,16 +10,18 @@ import time
 import json
 
 PARTICIPANTS = [Example1Bot(), MirrorBot(), RandomBot(), CallBot(), FoldBot()]
-TOTAL_ROUNDS = 100
+TOTAL_ROUNDS = 1000
 
 
 class ChallengeResult:
     stats: Dict[str, int]
     timestamp: int
+    iterations: int
 
-    def __init__(self, stats, timestamp) -> None:
+    def __init__(self, stats, timestamp, iterations) -> None:
         self.stats = stats
         self.timestamp = timestamp
+        self.iterations = iterations
 
 
 class ChallengeResultEncoder(JSONEncoder):
@@ -56,7 +58,7 @@ def main():
 
     timestamp = round(time.time())
     with open(f"./results/challenge-{timestamp}-{'-'.join(p.name for p in PARTICIPANTS)}.pckl", 'wb') as file:
-        challenge_result = ChallengeResult(stats, timestamp)
+        challenge_result = ChallengeResult(stats, timestamp, rounds)
         results_as_json = json.dumps(
             challenge_result, cls=ChallengeResultEncoder)
         pickle.dump(results_as_json, file)
