@@ -1,13 +1,14 @@
+from collections import defaultdict
+import pickle
 from environment.FixedLimitPoker import FixedLimitPoker
-from environment.observers.LoggingObserver import LoggingObserver
-from environment.observers.WebsocketsObserver import WebsocketsObserver
 from bots import Example1Bot, MirrorBot, RandomBot, CallBot, FoldBot
 import itertools
 import math
 import time
+import json
 
 PARTICIPANTS = [Example1Bot(), MirrorBot(), RandomBot(), CallBot(), FoldBot()]
-TOTAL_ROUNDS = 1000
+TOTAL_ROUNDS = 100
 
 
 def main():
@@ -18,22 +19,28 @@ def main():
     print(f"Each combination will be played: {rounds_for_each_pair} times")
 
     poker_rooms = [FixedLimitPoker(c) for c in combinations]
-    stats = dict()
-    
+    stats = defaultdict(lambda: 0)
+
     start_time = time.time()
     for room in poker_rooms:
-        print(f"Pairing {', '.join([p.bot.name for p in room.players])}")
+        print(f"Pairing {' vs. '.join([p.bot.name for p in room.players])}")
         for _ in range(rounds_for_each_pair):
             room.reset(rotatePlayers=True)
             for p in room.players:
-                if p.bot.name not in stats:
-                    stats[p.bot.name] = 0
                 stats[p.bot.name] += p.reward
 
-        print(stats)
-    
+        print(json.dumps(stats, ensure_ascii=True, sort_keys=True))
+
     duration = time.time() - start_time
-    print(f"Simulation took {round(duration/(rounds_for_each_pair * len(combinations)), 5)} seconds pr. round")
+    rounds = rounds_for_each_pair * len(combinations)
+    duration_pr_sim = round(duration/rounds, 5)
+    print(f"-----------------------------------------")
+    print(f"Simulation took {duration_pr_sim} seconds pr. round")
     print(f"--- {round(duration, 2)} seconds ---")
+
+    ts = round(time.time())
+    with open(f"./results/challenge-{ts}-{'-'.join(p.name for p in PARTICIPANTS)}.pckl", 'wb') as file:
+        pickle.dump(json.dumps(stats), file)
+
 
 main()
