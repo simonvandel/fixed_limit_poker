@@ -114,3 +114,5 @@ dmypy.json
 .pyre/
 
 results/*.pckl
+
+node_modules

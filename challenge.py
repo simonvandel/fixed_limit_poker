@@ -1,5 +1,7 @@
 from collections import defaultdict
+from json.encoder import JSONEncoder
 import pickle
+from typing import Dict
 from environment.FixedLimitPoker import FixedLimitPoker
 from bots import Example1Bot, MirrorBot, RandomBot, CallBot, FoldBot
 import itertools
@@ -8,7 +10,23 @@ import time
 import json
 
 PARTICIPANTS = [Example1Bot(), MirrorBot(), RandomBot(), CallBot(), FoldBot()]
-TOTAL_ROUNDS = 100
+TOTAL_ROUNDS = 1000
+
+
+class ChallengeResult:
+    stats: Dict[str, int]
+    timestamp: int
+    iterations: int
+
+    def __init__(self, stats, timestamp, iterations) -> None:
+        self.stats = stats
+        self.timestamp = timestamp
+        self.iterations = iterations
+
+
+class ChallengeResultEncoder(JSONEncoder):
+    def default(self, o):
+        return o.__dict__
 
 
 def main():
@@ -38,9 +56,12 @@ def main():
     print(f"Simulation took {duration_pr_sim} seconds pr. round")
     print(f"--- {round(duration, 2)} seconds ---")
 
-    ts = round(time.time())
-    with open(f"./results/challenge-{ts}-{'-'.join(p.name for p in PARTICIPANTS)}.pckl", 'wb') as file:
-        pickle.dump(json.dumps(stats), file)
+    timestamp = round(time.time())
+    with open(f"./results/challenge-{timestamp}-{'-'.join(p.name for p in PARTICIPANTS)}.pckl", 'wb') as file:
+        challenge_result = ChallengeResult(stats, timestamp, rounds)
+        results_as_json = json.dumps(
+            challenge_result, cls=ChallengeResultEncoder)
+        pickle.dump(results_as_json, file)
 
 
 main()

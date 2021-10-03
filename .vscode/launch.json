@@ -31,6 +31,13 @@
             "request": "launch",
             "program": "challenge.py",
             "console": "integratedTerminal"
+        },
+        {
+            "name": "Python: read_results",
+            "type": "python",
+            "request": "launch",
+            "program": "read_results.py",
+            "console": "integratedTerminal"
         }
     ]
 }
