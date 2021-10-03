@@ -114,3 +114,49 @@ dmypy.json
 .pyre/
 
 results/*.pckl
+
+# See http://help.github.com/ignore-files/ for more about ignoring files.
+
+# compiled output
+scoreboard/dist
+scoreboard/tmp
+scoreboard/out-tsc
+# Only exists if Bazel was run
+scoreboard/bazel-out
+
+# dependencies
+scoreboard/node_modules
+
+# profiling files
+chrome-profiler-events*.json
+
+# IDEs and editors
+scoreboard/.idea
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+
+# IDE - VSCode
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+.history/*
+
+# misc
+scoreboard/.sass-cache
+scoreboard/connect.lock
+scoreboard/coverage
+scoreboard/libpeerconnection.log
+npm-debug.log
+yarn-error.log
+testem.log
+scoreboard/typings
+
+# System Files
+.DS_Store
+Thumbs.db
