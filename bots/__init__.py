@@ -1,3 +1,4 @@
+from .BotInterface import BotInterface
 from .CallBot import CallBot
 from .EmptyBot import EmptyBot
 from .Example1Bot import Example1Bot

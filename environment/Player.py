@@ -1,7 +1,7 @@
 from typing import Dict, List, Sequence
 
-from bots.BotInterface import BotInterface
-from environment.Constants import Action, Stage
+from bots import BotInterface
+from environment import Action, Stage
 
 
 class Player:
