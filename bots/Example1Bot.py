@@ -92,7 +92,7 @@ class Example1Bot(BotInterface):
                     print("flushdraw")
                     return True
             else:
-                suitCounts[c[1]] = 0
+                suitCounts[c[1]] = 1
         return False
 
     def getStraightDraw(self, observation: Observation):
