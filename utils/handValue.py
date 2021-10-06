@@ -1,6 +1,6 @@
 import pickle
-from typing import List, Sequence
-
+from typing import Dict, List, Sequence
+from collections import defaultdict
 from environment.Constants import RANKS, HandType
 from utils.deuces.card import Card
 from utils.deuces.evaluator import Evaluator
@@ -39,3 +39,32 @@ def getHandType(hand: List[str], board: List[str] = []):
         d_board = [Card().new(c) for c in board]
         evaluator = Evaluator()
         return HandType(evaluator.get_rank_class(evaluator.evaluate(d_hand, d_board)))
+
+def getLongestStraight(hand: List[str], board: List[str] = []):
+    cardRanks = [RANKS.index(c[0]) for c in hand + board]
+    if RANKS.index('A') in cardRanks:
+        cardRanks.append(-1) # add low ace
+    cardRanksSet = set(cardRanks)
+
+    ans = 0
+    startRank = 0
+    for rank in cardRanksSet:  
+        j = rank + 1
+
+        while j in cardRanksSet:
+            j = j + 1
+
+        if j - rank > ans:
+            ans = j - rank
+            startRank = rank
+    
+    if startRank == -1:
+        return ans, "A", RANKS[startRank + ans - 1]
+    return ans, RANKS[startRank], RANKS[startRank + ans - 1]
+
+def getHighestSuitCount(hand: List[str], board: List[str] = []):
+    suitCounts: Dict[str, int] = defaultdict(lambda: 0)
+    for c in hand + board:
+        suitCounts[c[1]] += 1
+    maxSuit = max(suitCounts, key=suitCounts.get)
+    return suitCounts[maxSuit], maxSuit
