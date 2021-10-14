@@ -12,7 +12,7 @@
   - [ ] Spil N bots mod hinanden alle mod alle
   - [ ] Vis resultat som matchup tabel
 - [ ] Fejlhåndtering
-  - [ ] Hvis de crasher
+  - [X] Hvis de crasher
   - [ ] Hvis de tager for lang tid (1 sekund?)
 - [ ] Reimplment scoreboard using Google docs
   - [ ] Gather results (in observer?) 

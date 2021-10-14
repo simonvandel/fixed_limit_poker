@@ -6,3 +6,4 @@ from .FoldBot import FoldBot
 from .MirrorBot import MirrorBot
 from .RandomBot import RandomBot
 from .UnitTesterBot import UnitTesterBot
+from .ExceptionBot import ExceptionBot

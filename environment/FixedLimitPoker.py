@@ -92,7 +92,13 @@ class FixedLimitPoker:
             
         self.updateActionSpace()
         if self.getCurrentPlayer().isAutoPlayer():
-            return self.step(self.getAutoPlayerMove())
+            try:
+                move = self.getAutoPlayerMove()
+            except Exception as ex:
+                move = Action.FOLD
+                print(f"Bot: '{self.getCurrentPlayer().bot.name}' caused an exception!!! Folding on their behalf.")
+                print(ex)
+            return self.step(move)
         else:
             return (self.actionSpace, self.getObservation(), 0, False)
 
