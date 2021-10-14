@@ -19,6 +19,8 @@ Nice to have:
 
 - [ ] løbende turneringer
   - [ ] Hvordan får vi deres kode?
+    - [ ] GitHub gist?
+    - [ ] Github Repo?
 
 
 
