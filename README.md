@@ -11,10 +11,14 @@
 - [ ] Håndter multiple kampe samtidig
   - [ ] Spil N bots mod hinanden alle mod alle
   - [ ] Vis resultat som matchup tabel
+- [ ] Fejlhåndtering
+  - [ ] Hvis de crasher
+  - [ ] Hvis de tager for lang tid (1 sekund?)
 
 Nice to have:
 
 - [ ] løbende turneringer
+  - [ ] Hvordan får vi deres kode?
 
 
 
