@@ -15,7 +15,7 @@ from environment.FixedLimitPoker import FixedLimitPoker
 PARTICIPANTS = [Example1Bot("player1"), Example1Bot("player2"), Example1Bot(
     "player3"), Example1Bot("player4"), Example1Bot("player5")]
 TOTAL_ROUNDS = 1000
-
+PROCESS_COUNT = mp.cpu_count() - 2
 
 class ChallengeResult:
     stats: Dict[str, int]
@@ -69,7 +69,7 @@ def main():
         jobs.put(c)
 
     processes = []
-    for _ in range(mp.cpu_count() - 2):
+    for _ in range(PROCESS_COUNT):
         p = mp.Process(target=play, args=(jobs, rounds_for_each_pair, stats))
         processes.append(p)
         p.start()
@@ -89,6 +89,7 @@ def main():
     duration_pr_sim = round(duration/rounds, 5)
     print(f"-----------------------------------------")
     print(f"Simulation took {duration_pr_sim} seconds pr. round")
+    print(f"Using {PROCESS_COUNT} processes")
     print(f"--- {round(duration, 2)} seconds ---")
 
     timestamp = round(time.time())
