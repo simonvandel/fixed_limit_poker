@@ -14,6 +14,10 @@
 - [ ] Fejlhåndtering
   - [ ] Hvis de crasher
   - [ ] Hvis de tager for lang tid (1 sekund?)
+- [ ] Reimplment scoreboard using Google docs
+  - [ ] Gather results (in observer?) 
+  - [ ] Upload raw data to Google sheets
+  - [ ] Make Google Sheet that displays data in a pretty way
 
 Nice to have:
 
