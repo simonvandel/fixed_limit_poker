@@ -8,9 +8,9 @@
   - [X] preflop hånd rang 
   - [X] postflop hånd rang
   - [ ] Bedre bot eksempler
-- [ ] Håndter multiple kampe samtidig
-  - [ ] Spil N bots mod hinanden alle mod alle
-  - [ ] Vis resultat som matchup tabel
+- [X] Håndter multiple kampe samtidig
+  - [X] Spil N bots mod hinanden alle mod alle
+  - [X] Gem resultat som matchup tabel
 - [ ] Fejlhåndtering
   - [X] Hvis de crasher
   - [ ] Hvis de tager for lang tid (1 sekund?)
