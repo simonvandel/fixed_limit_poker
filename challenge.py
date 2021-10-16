@@ -5,6 +5,7 @@ import multiprocessing as mp
 import pickle
 import queue
 import time
+import pandas as pd
 from collections import defaultdict
 from json.encoder import JSONEncoder
 from typing import Dict
@@ -77,10 +78,9 @@ def main():
     for p in processes:
         p.join()
 
-    res = defaultdict(dict)
+    cols = [x.name for x in PARTICIPANTS]
+    res = pd.DataFrame(0, columns=cols, index=cols + ["sum"])
     for key in stats.keys():
-        if "sum" not in res[key[0]]:
-            res[key[0]]["sum"] = 0
         res[key[0]]["sum"] += stats[key]
         res[key[0]][key[1]] = stats[key]
 
@@ -93,11 +93,8 @@ def main():
     print(f"--- {round(duration, 2)} seconds ---")
 
     timestamp = round(time.time())
-    with open(f"./results/challenge-{timestamp}-{'-'.join(p.name for p in PARTICIPANTS)}.pckl", 'wb') as file:
-        challenge_result = ChallengeResult(res, timestamp, rounds)
-        results_as_json = json.dumps(
-            challenge_result, cls=ChallengeResultEncoder)
-        pickle.dump(results_as_json, file)
+    with open(f"./results/challenge-{timestamp}.csv", 'wb') as file:
+        res.to_csv(file)
         print("Wrote to file ...")
 
 
