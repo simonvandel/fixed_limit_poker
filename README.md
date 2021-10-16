@@ -1,7 +1,6 @@
 - [X] Tilføj oberserver pattern - Troels
   - [X] Tilføj console observer - Troels
   - [X] Tilføj Websocket observer - Troels
-  - [ ] Tilføj end of round observer (summér resultater over mange hænder) - Troels
 - [X] Tilføj tests - Bovle
 - [ ] Lav UI - Harder
 - [ ] Lav UI Data
