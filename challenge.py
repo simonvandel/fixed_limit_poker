@@ -1,14 +1,9 @@
 import itertools
-import json
 import math
 import multiprocessing as mp
-import pickle
 import queue
 import time
 import pandas as pd
-from collections import defaultdict
-from json.encoder import JSONEncoder
-from typing import Dict
 
 from bots import CallBot, Example1Bot, FoldBot, MirrorBot, RandomBot
 from environment.FixedLimitPoker import FixedLimitPoker
@@ -17,22 +12,6 @@ PARTICIPANTS = [Example1Bot("player1"), Example1Bot("player2"), Example1Bot(
     "player3"), Example1Bot("player4"), Example1Bot("player5")]
 TOTAL_ROUNDS = 1000
 PROCESS_COUNT = mp.cpu_count() - 2
-
-class ChallengeResult:
-    stats: Dict[str, int]
-    timestamp: int
-    iterations: int
-
-    def __init__(self, stats, timestamp, iterations) -> None:
-        self.stats = stats
-        self.timestamp = timestamp
-        self.iterations = iterations
-
-
-class ChallengeResultEncoder(JSONEncoder):
-    def default(self, o):
-        return o.__dict__
-
 
 def play(jobQueue: mp.Queue, roundsPerRoom: int, stats):
     while not jobQueue.empty():
