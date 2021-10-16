@@ -4,6 +4,8 @@
   - [ ] Tilføj end of round observer (summér resultater over mange hænder) - Troels
 - [X] Tilføj tests - Bovle
 - [ ] Lav UI - Harder
+- [ ] Lav UI Data
+  - [ ] JSON kamp data 
 - [ ] Hjælp til bot udvikling
   - [X] preflop hånd rang 
   - [X] postflop hånd rang
