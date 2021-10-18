@@ -1,0 +1,13 @@
+<mat-grid-list cols="2" rowHeight="200px" >
+    <mat-grid-tile>
+        <app-poker-player [player]="player1"></app-poker-player>
+
+    </mat-grid-tile>
+    <mat-grid-tile>
+        <app-poker-player [player]="player2"></app-poker-player>
+
+    </mat-grid-tile>
+    <mat-grid-tile>
+        <app-card-group [cards]="community"></app-card-group>
+    </mat-grid-tile>
+</mat-grid-list>
