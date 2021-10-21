@@ -1,9 +1,12 @@
-<p>{{player.name}}</p>
-<div class="background">
-    <div class="head">
-        <img [src]="imgurl" >
-    </div>    
+<div class="{{side}}">
 
-    <app-card-group [cards]="player.cards"></app-card-group>
+    <p class="name">{{player.name}}</p>
+    <div class="background">
+        <div class="head">
+            <img [src]="imgurl">
+        </div>
+
+        <app-card-group [cards]="player.cards"></app-card-group>
+    </div>
+
 </div>
-
