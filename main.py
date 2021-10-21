@@ -6,7 +6,6 @@ from environment.FixedLimitPoker import FixedLimitPoker
 from environment.observers.LoggingObserver import LoggingObserver
 
 
-def main():
     observers = [LoggingObserver()]
     env = FixedLimitPoker(
         [PercentBot(), CounterBot()], observers=observers)
