@@ -1,2 +1,9 @@
-<p>Player: {{player.name}}</p>
-<app-card-group [cards]="player.cards"></app-card-group>
+<p>{{player.name}}</p>
+<div class="background">
+    <div class="head">
+        <img [src]="imgurl" >
+    </div>    
+
+    <app-card-group [cards]="player.cards"></app-card-group>
+</div>
+
