@@ -8,7 +8,7 @@ import { Player } from '../poker-game/poker-game.service';
 })
 export class PokerPlayerComponent implements OnInit {
   @Input() player!: Player;
-
+  @Input() imgurl: string = 'https://cdn.pixabay.com/photo/2016/03/08/07/08/question-1243504_960_720.png';
   constructor() { }
 
   ngOnInit(): void {

@@ -1,13 +1,28 @@
-<mat-grid-list cols="2" rowHeight="200px" >
-    <mat-grid-tile>
-        <app-poker-player [player]="player1"></app-poker-player>
-
-    </mat-grid-tile>
-    <mat-grid-tile>
-        <app-poker-player [player]="player2"></app-poker-player>
-
-    </mat-grid-tile>
-    <mat-grid-tile>
-        <app-card-group [cards]="community"></app-card-group>
-    </mat-grid-tile>
-</mat-grid-list>
+<div class="borderOut">
+    <div class="restFrame" >      
+      
+      <div class="borderIn">
+        <div class="wood">
+          <div class="cloth">              
+            <div class="dottedLine">
+              <div class="player left">
+                <app-poker-player [player]="player1" [imgurl]="player1link"></app-poker-player>
+              </div>
+              <div class="player right">
+                <app-poker-player [player]="player2"  [imgurl]="player2link"></app-poker-player>
+              </div>
+            <div class="community">
+              <app-card-group [cards]="community" [overlap]="true"></app-card-group>
+            </div>              
+              <div class="bigLine">
+                <div class="waterMark">
+                  NC Poker
+                </div>              
+               
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

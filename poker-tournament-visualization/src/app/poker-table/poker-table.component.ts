@@ -1,3 +1,4 @@
+/* eslint-disable require-jsdoc */
 import { Component, Input, OnChanges, OnInit, SimpleChange } from '@angular/core';
 import { HandPlayer1, History, Player, PokerGame, Stage, TopLevelPlayer1 } from '../poker-game/poker-game.service';
 
@@ -15,6 +16,8 @@ export class PokerTableComponent implements OnInit, OnChanges {
 
   player1!: Player;
   player2!: Player;
+  player1link="https://media-exp1.licdn.com/dms/image/C5603AQGAUW9uU9JtGw/profile-displayphoto-shrink_200_200/0/1581669563810?e=1640217600&v=beta&t=WHteJ76sNXQZ9l6yySjTvMNTyExfgZtYPa5WRIctkyk"
+  player2link="https://media-exp1.licdn.com/dms/image/C5603AQHxqi2EjCLiKQ/profile-displayphoto-shrink_200_200/0/1580829910259?e=1640217600&v=beta&t=6Ry0x-EzdCjOmgaIcXGoO4jrZv7Uh2ROx2ymfOr3ag4"
 
   constructor() {
   }
@@ -29,6 +32,7 @@ export class PokerTableComponent implements OnInit, OnChanges {
     console.log("table changes!")
     let change: SimpleChange = changes['data'];
     console.log(change)
+    console.log(changes)
     this.setCommunity();
   }
 
