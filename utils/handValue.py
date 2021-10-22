@@ -5,6 +5,9 @@ from environment.Constants import RANKS, HandType
 from utils.deuces.card import Card
 from utils.deuces.evaluator import Evaluator
 
+evaluator = Evaluator()
+with open('./utils/preflopHandRankings.pckl', 'rb') as rankingsFile:
+    rankings = pickle.load(rankingsFile)
 
 def _getPreflopHandType(hand: Sequence[str]) -> str:
     hand = sorted(hand, key=lambda x: RANKS.index(x[0]), reverse=True)
@@ -18,12 +21,9 @@ def _getPreflopHandType(hand: Sequence[str]) -> str:
 
 def getHandPercent(hand: Sequence[str], board: Sequence[str] = []) -> Tuple[float, List[str]]:
     if len(board) == 0:
-        with open('./utils/preflopHandRankings.pckl', 'rb') as rankingsFile:
-            rankings = pickle.load(rankingsFile)
-            preflopHandType = _getPreflopHandType(hand)
-            return rankings[preflopHandType], hand
+        preflopHandType = _getPreflopHandType(hand)
+        return rankings[preflopHandType], hand
     else:
-        evaluator = Evaluator()
         d_hand = [Card().new(c) for c in hand]
         d_board = [Card().new(c) for c in board]
         rank, cards = evaluator.evaluate(d_hand, d_board)
@@ -37,7 +37,6 @@ def getHandType(hand: List[str], board: List[str] = []) -> Tuple[HandType, List[
     else:    
         d_hand = [Card().new(c) for c in hand]
         d_board = [Card().new(c) for c in board]
-        evaluator = Evaluator()
         rank, cards = evaluator.evaluate(d_hand, d_board)
         return HandType(evaluator.get_rank_class(rank)), [Card.int_to_pretty_str(c) for c in cards]
 
