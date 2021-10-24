@@ -6,8 +6,6 @@ import { AppComponent } from './app.component';
 import { PokerGameModule } from './poker-game/poker-game.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSliderModule } from '@angular/material/slider';
-import { PokerActionComponent } from './poker-action/poker-action.component';
-import { CardGroupComponent } from './card-group/card-group.component';
 
 @NgModule({
   declarations: [
