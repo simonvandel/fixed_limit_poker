@@ -5,12 +5,19 @@ import queue
 import time
 import pandas as pd
 
-from bots import CallBot, PercentBot, FoldBot, RandomBot, CounterBot
+from bots import PercentBot, CounterBot
 from environment.FixedLimitPoker import FixedLimitPoker
 
-PARTICIPANTS = [PercentBot("player1"), CounterBot("player2")]
+PARTICIPANTS = [
+    CounterBot("Counter"),
+    CounterBot("Counter-Strike"),
+    PercentBot("Free"),
+    PercentBot("Guy"),
+    PercentBot("Percent"),
+]
 TOTAL_ROUNDS = 1000
 PROCESS_COUNT = mp.cpu_count() - 2
+
 
 def play(jobQueue: mp.Queue, roundsPerRoom: int, stats):
     while not jobQueue.empty():
@@ -57,10 +64,14 @@ def main():
         p.join()
 
     cols = [x.name for x in PARTICIPANTS]
-    res = pd.DataFrame(0, columns=cols, index=cols + ["sum"])
+    res = pd.DataFrame(0, columns=cols, index=cols + ["sum", "pr. round"])
     for key in stats.keys():
         res[key[0]]["sum"] += stats[key]
         res[key[0]][key[1]] = stats[key]
+
+    for c in cols:
+        res[c]["pr. round"] = round(
+            res[c]["sum"] / (rounds_for_each_pair * (len(PARTICIPANTS) - 1)), 3)
 
     print(res)
 
@@ -72,9 +83,8 @@ def main():
     print(f"Using {PROCESS_COUNT} processes")
     print(f"--- {round(duration, 2)} seconds ---")
 
-    
     #timestamp = round(time.time())
-    #with open(f"./results/challenge-{timestamp}.csv", 'wb') as file:
+    # with open(f"./results/challenge-{timestamp}.csv", 'wb') as file:
     #    res.to_csv(file)
     #    print("Wrote to file ...")
 
