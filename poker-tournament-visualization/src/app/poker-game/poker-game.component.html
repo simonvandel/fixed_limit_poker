@@ -1,5 +1,24 @@
 <app-poker-table [game]="game" [stage]="stage"></app-poker-table>
-<mat-slider id="slider" #slider [(ngModel)]="actionSlider" min="0" max="{{getMaxActions()}}"
-    [tickInterval]="'1'" (input)="sliderOnChange($event)"></mat-slider>
-<p>Current action {{actionSlider}} of {{getMaxActions()}}</p>
-<app-poker-action [action]="getCurrentAction()"></app-poker-action>
+<mat-slider
+  id="slider"
+  #slider
+  [(ngModel)]="actionSlider"
+  min="0"
+  max="{{ getMaxActions() }}"
+  [tickInterval]="'1'"
+  (input)="sliderOnChange($event)"
+></mat-slider>
+<div class="row">
+  <button
+    mat-fab
+    color="primary"
+    aria-label="Example icon button with a delete icon"
+    (click)="playPause()"
+  >
+    <mat-icon>play_arrow</mat-icon>
+  </button>
+</div>
+<div>
+  <p>Current action {{ actionSlider }} of {{ getMaxActions() }}</p>
+  <app-poker-action [action]="getCurrentAction()"></app-poker-action>
+</div>

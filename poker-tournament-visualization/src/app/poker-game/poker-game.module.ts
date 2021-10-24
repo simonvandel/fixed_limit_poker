@@ -9,6 +9,9 @@ import { FormsModule } from '@angular/forms';
 import { PokerActionComponent } from '../poker-action/poker-action.component';
 import { CardGroupComponent } from '../card-group/card-group.component';
 import { MatGridListModule } from '@angular/material/grid-list';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
 
 @NgModule({
   declarations: [
@@ -23,12 +26,11 @@ import { MatGridListModule } from '@angular/material/grid-list';
     MatSliderModule,
     MatGridListModule,
     FormsModule,
+    MatIconModule,
+    MatButtonModule,
+    MatButtonToggleModule,
   ],
-  exports: [
-    PokerGameComponent,
-  ],
-  providers: [
-    PokerGameService,
-  ]
+  exports: [PokerGameComponent],
+  providers: [PokerGameService],
 })
-export class PokerGameModule { }
+export class PokerGameModule {}

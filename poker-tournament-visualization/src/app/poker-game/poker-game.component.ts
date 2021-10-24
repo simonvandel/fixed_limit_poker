@@ -1,29 +1,56 @@
 import { Component, OnChanges, OnInit, Output } from '@angular/core';
-import { MatSliderChange } from '@angular/material/slider';
-import { PokerGame, PokerGameService, Stage, History } from './poker-game.service';
+import {
+  PokerGame,
+  PokerGameService,
+  Stage,
+  History,
+} from './poker-game.service';
 
 @Component({
   selector: 'app-poker-game',
   templateUrl: './poker-game.component.html',
-  styleUrls: ['./poker-game.component.css']
+  styleUrls: ['./poker-game.component.css'],
 })
 export class PokerGameComponent implements OnInit, OnChanges {
   game: PokerGame;
   stage: Stage;
   actionSlider: number = 1;
+  timeLeft: number = 60;
+  interval: any;
 
   constructor(private pokerGameService: PokerGameService) {
     this.game = this.pokerGameService.game[0];
     this.stage = Stage.Preflop;
   }
 
-  ngOnInit(): void {
-
-  }
+  ngOnInit(): void {}
 
   ngOnChanges(): void {
-    console.log("game changes!")
-    this.setStage()
+    console.log('game changes!');
+    this.setStage();
+  }
+
+  playPause(): void {
+    console.log('pause / play');
+    // Pause if playing
+    if (this.interval != null) {
+      console.log('pausing');
+      clearInterval(this.interval);
+      return;
+    }
+    // Start playing.
+    console.log('playing');
+    this.interval = setInterval(() => {
+      console.log('play loop');
+      if (this.actionSlider < this.getMaxActions()) {
+        this.actionSlider = this.actionSlider + 1;
+          this.sliderOnChange(this.actionSlider + 1);
+      } else {
+        if (this.interval != null) {
+          clearInterval(this.interval);
+        }
+      }
+    }, 1000);
   }
 
   setStage(val?: number): void {
@@ -55,7 +82,6 @@ export class PokerGameComponent implements OnInit, OnChanges {
   }
 
   sliderOnChange(event: any) {
-    this.setStage(event.value)
+    this.setStage(event.value);
   }
 }
-
