@@ -132,7 +132,6 @@ class FixedLimitPoker:
             elif val == winnerVal:
                 winners.append(i)
         return winners
-        
 
     def newRound(self) -> None:
         self.activePlayerQueue = sorted(self.activePlayerQueue)

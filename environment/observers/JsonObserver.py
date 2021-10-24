@@ -69,8 +69,8 @@ class JsonObserver(Observer):
             "board_cards": observation.boardCards
         }
         if observation.stage == Stage.SHOWDOWN:
-            res["player1_hand_type"] = getHandType(observation.hands[self.player1Name], observation.boardCards).name
-            res["player2_hand_type"] = getHandType(observation.hands[self.player2Name], observation.boardCards).name
+            res["player1_hand_type"], _ = getHandType(observation.hands[self.player1Name], observation.boardCards)
+            res["player2_hand_type"], _ = getHandType(observation.hands[self.player2Name], observation.boardCards)
         self.currentHand["history"].append(res)
 
     def LogPlayerAction(self, observation: OmnipotentObservation, player: Player, action: Action) -> None:
