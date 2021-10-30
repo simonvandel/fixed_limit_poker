@@ -34,6 +34,13 @@
             "console": "integratedTerminal"
         },
         {
+            "name": "Python: Tournament",
+            "type": "python",
+            "request": "launch",
+            "program": "tournament.py",
+            "console": "integratedTerminal"
+        },
+        {
             "name": "Python: read_results",
             "type": "python",
             "request": "launch",

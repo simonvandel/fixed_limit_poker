@@ -54,30 +54,34 @@ class JsonObserver(Observer):
         self.currentHand["history"].append({
             "player": "player1" if observation.players[0].name == self.player1Name else "player2",
             "action": "small_blind",
-            "total_player_contribution": observation.players[0].contribution
+            "stage_contribution": observation.players[0].contribution,
+            "stack": observation.players[0].stack
         })
         self.currentHand["history"].append({
             "player": "player1" if observation.players[1].name == self.player1Name else "player2",
             "action": "big_blind",
-            "total_player_contribution": observation.players[1].contribution
+            "stage_contribution": observation.players[1].contribution,
+            "stack": observation.players[1].stack
         })
         
 
     def LogNewRound(self,observation: OmnipotentObservation) -> None:
         res = {
             "action": observation.stage.name,
-            "board_cards": observation.boardCards
+            "board_cards": observation.boardCards,
+            "pot": observation.totalPot
         }
         if observation.stage == Stage.SHOWDOWN:
-            res["player1_hand_type"] = getHandType(observation.hands[self.player1Name], observation.boardCards).name
-            res["player2_hand_type"] = getHandType(observation.hands[self.player2Name], observation.boardCards).name
+            res["player1_hand_type"] = getHandType(observation.hands[self.player1Name], observation.boardCards)[0].name
+            res["player2_hand_type"] = getHandType(observation.hands[self.player2Name], observation.boardCards)[0].name
         self.currentHand["history"].append(res)
 
     def LogPlayerAction(self, observation: OmnipotentObservation, player: Player, action: Action) -> None:
         self.currentHand["history"].append({
             "player": "player1" if player.bot.name == self.player1Name else "player2",
             "action": action.name,
-            "total_player_contribution": player.contribution
+            "stage_contribution": player.contribution,
+            "stack": player.stack
         })
         if action == Action.RAISE:
             self.raiseCount = self.raiseCount + 1
