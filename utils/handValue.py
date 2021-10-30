@@ -27,13 +27,13 @@ def getHandPercent(hand: Sequence[str], board: Sequence[str] = []) -> Tuple[floa
         d_hand = [Card().new(c) for c in hand]
         d_board = [Card().new(c) for c in board]
         rank, cards = evaluator.evaluate(d_hand, d_board)
-        percentage = evaluator.get_five_card_rank_percentage(rank)  # higher better here
+        percentage = evaluator.get_five_card_rank_percentage(rank)  # lower better here
         return percentage, [Card.int_to_pretty_str(c) for c in cards]
 
 
 def getHandType(hand: List[str], board: List[str] = []) -> Tuple[HandType, List[str]]:
     if len(board) == 0:
-        return _getPreflopHandType(hand)
+        return _getPreflopHandType(hand), hand
     else:    
         d_hand = [Card().new(c) for c in hand]
         d_board = [Card().new(c) for c in board]

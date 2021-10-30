@@ -62,7 +62,7 @@ class Evaluator(object):
         and returns this ranking.
         """
         minimum = LookupTable.MAX_HIGH_CARD
-        cards = cards[0:5]
+        resCards = cards[0:5]
 
         all5cardcombobs = itertools.combinations(cards, 5)
         for combo in all5cardcombobs:
@@ -70,9 +70,9 @@ class Evaluator(object):
             score, _ = self._five(combo)
             if score < minimum:
                 minimum = score
-                cards = combo
+                resCards = combo
 
-        return minimum, cards
+        return minimum, resCards
 
     def _seven(self, cards):
         """
@@ -81,7 +81,7 @@ class Evaluator(object):
         and returns this ranking.
         """
         minimum = LookupTable.MAX_HIGH_CARD
-        cards = cards[0:5]
+        resCards = cards[0:5]
 
         all5cardcombobs = itertools.combinations(cards, 5)
         for combo in all5cardcombobs:
@@ -89,9 +89,9 @@ class Evaluator(object):
             score, _ = self._five(combo)
             if score < minimum:
                 minimum = score
-                cards = combo
+                resCards = combo
 
-        return minimum, cards
+        return minimum, resCards
 
     def get_rank_class(self, hr):
         """
