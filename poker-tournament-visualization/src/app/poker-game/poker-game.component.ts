@@ -19,7 +19,6 @@ export class PokerGameComponent implements OnInit, OnChanges {
   }
 
   ngOnInit(): void {
-
     const element = document.getElementById('slider');
     setTimeout(function() { element?.focus() }, 20); 
     

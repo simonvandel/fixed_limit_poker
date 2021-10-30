@@ -97,7 +97,6 @@ export class PokerTableComponent implements OnInit, OnChanges {
         community.push(...cards);
       }
     }
-
     this.pot = pot
     this.community = community;
   }
