@@ -90,17 +90,6 @@ app-dual-stack {
   border: 2px dashed #ffffff3b;
 }
 
-.bigLine {
-  width: 89%;
-  height: 81%;
-  position: relative;
-  background: transparent;
-  border-radius: 200px;
-  top: 8.5%;
-  left: 5%;
-  border: 2px solid #ffffff36;
-}
-
 .waterMark {
   font-family: Myriad;
   font-size: 30px;
@@ -115,27 +104,14 @@ app-dual-stack {
   text-shadow: 0px 0px 1px #ffffff36;
 }
 
-.deck {
+.pot {
   position: absolute;
-  top: 40px;
-  right: -30px;
-}
-
-.label.pot {
-  position: absolute;
-  top: 160px;
+  top: 10%;
   left: calc(50% - 100px);
   width: 200px;
   text-align: center;
   color: #fde9ba;
   text-shadow: 1px 1px 0px black;
-}
-
-.potChips {
-  position: absolute;
-  transform: scale(0.2);
-  right: 89px;
-  top: 130px;
 }
 
 .player {

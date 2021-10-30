@@ -20,6 +20,16 @@
     font-family: helvetica;
 }
 
+.chips {
+    position: relative;
+    left: 100%;
+}
+
+.right .chips {
+    position: relative;
+    left: -100%;
+}
+
 img {
     width: 100px;
     height: 100%;
@@ -49,4 +59,8 @@ p.name {
     text-align: right;
     /* width: unset;  */
     /*this is important for left justification of right player text */
+}
+
+.chips_wagered {
+    position: absolute;
 }

@@ -1,4 +1,4 @@
-<app-poker-table [game]="game" [stage]="stage"></app-poker-table>
+<app-poker-table [game]="game" [stage]="stage" [hand]="hand" [step]="actionSlider"></app-poker-table>
 <mat-slider id="slider" #slider [(ngModel)]="actionSlider" min="0" max="{{getMaxActions()}}"
     [tickInterval]="'1'" (input)="sliderOnChange($event)"></mat-slider>
 <p>Current action {{actionSlider}} of {{getMaxActions()}}</p>

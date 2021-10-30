@@ -10,7 +10,8 @@ import { PokerGame, PokerGameService, Stage, History } from './poker-game.servic
 export class PokerGameComponent implements OnInit, OnChanges {
   game: PokerGame;
   stage: Stage;
-  actionSlider: number = 1;
+  actionSlider: number = 0;
+  hand: number = 1;
 
   constructor(private pokerGameService: PokerGameService) {
     this.game = this.pokerGameService.game[0];
@@ -18,7 +19,9 @@ export class PokerGameComponent implements OnInit, OnChanges {
   }
 
   ngOnInit(): void {
-
+    const element = document.getElementById('slider');
+    setTimeout(function() { element?.focus() }, 20); 
+    
   }
 
   ngOnChanges(): void {
@@ -27,10 +30,10 @@ export class PokerGameComponent implements OnInit, OnChanges {
   }
 
   setStage(val?: number): void {
-    const newValue = val ? val : this.actionSlider;
+    const newValue = val ?? this.actionSlider;
     let currentStage = Stage.Preflop;
     for (let index = 0; index <= newValue; index++) {
-      const action = this.game.hands[0].history[index].action;
+      const action = this.game.hands[this.hand].history[index].action;
       if (action == Stage.Preflop) {
         currentStage = Stage.Preflop;
       } else if (action == Stage.Flop) {
@@ -45,13 +48,13 @@ export class PokerGameComponent implements OnInit, OnChanges {
   }
 
   getMaxActions(): number {
-    const actions = this.game.hands[0].history.length;
+    const actions = this.game.hands[this.hand].history.length-1;
     return actions; // +1 for the show-down
   }
 
   getCurrentAction(): History {
     const idx = this.actionSlider;
-    return this.game.hands[0].history[idx];
+    return this.game.hands[this.hand].history[idx];
   }
 
   sliderOnChange(event: any) {

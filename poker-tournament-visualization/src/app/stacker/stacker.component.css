@@ -1,4 +1,12 @@
 .stack {
     display: inline-block;
 }
+
+.chip {
+    width: 120%;
+}
+
+.chip:first-child {
+    width: 60%;
+}
   
