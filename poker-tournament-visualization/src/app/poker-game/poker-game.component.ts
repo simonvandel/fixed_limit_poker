@@ -20,7 +20,7 @@ export class PokerGameComponent implements OnInit, OnChanges {
 
   ngOnInit(): void {
     const element = document.getElementById('slider');
-    setTimeout(function() { element?.focus() }, 20); 
+    setTimeout(function() { element?.focus() }, 20);
     
   }
 
@@ -59,6 +59,7 @@ export class PokerGameComponent implements OnInit, OnChanges {
 
   sliderOnChange(event: any) {
     this.setStage(event.value)
+    this.actionSlider = event.value
   }
 
   getMaxHands(): number {

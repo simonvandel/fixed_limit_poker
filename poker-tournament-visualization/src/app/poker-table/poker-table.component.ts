@@ -28,12 +28,11 @@ export class PokerTableComponent implements OnInit, OnChanges {
   }
 
   ngOnInit(): void {
-    this.player1 = this.getPlayer(this.game.hands[this.hand].player1, this.game.player1);
-    this.player2 = this.getPlayer(this.game.hands[this.hand].player2, this.game.player2);
-    this.history = this.game.hands[this.hand].history;
+    this.setupGame()
   }
 
   ngOnChanges(changes: { [property: string]: SimpleChange }): void {
+    this.setupGame()
     console.log("table changes!")
     let change: SimpleChange = changes['data'];
     console.log(change)
@@ -42,6 +41,12 @@ export class PokerTableComponent implements OnInit, OnChanges {
     this.player1Playerstate = this.setPlayerState('player1');
     this.player2Playerstate = this.setPlayerState('player2');
   }
+  setupGame(){
+    this.player1 = this.getPlayer(this.game.hands[this.hand].player1, this.game.player1);
+    this.player2 = this.getPlayer(this.game.hands[this.hand].player2, this.game.player2);
+    this.history = this.game.hands[this.hand].history;
+  }
+
 
   getPlayer(handPlayer: HandPlayer1, player: TopLevelPlayer1): Player {
     return {

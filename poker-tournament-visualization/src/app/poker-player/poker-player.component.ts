@@ -15,5 +15,4 @@ export class PokerPlayerComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void { }
-
 }
