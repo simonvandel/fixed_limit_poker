@@ -1,14 +1,22 @@
-from os.path import dirname, join, exists
-from os import makedirs, sep
-from datetime import datetime
 import glob
-import urllib.request
 import importlib
-import challenge
 import re
+import urllib.request
+from datetime import datetime
+from os import makedirs, sep
+from os.path import dirname, exists, join
+from time import sleep
 
-now = datetime.now()
-PATH_TO_BOTS_RELATIVE = f"results\\{now.year}{now.month}{now.day}-{now.hour}{now.minute}{now.second}\\bots"
+import gspread
+from gspread_pandas import Spread, Client
+import pandas as pd
+from oauth2client.service_account import ServiceAccountCredentials
+
+import challenge
+
+NOW = datetime.now()
+PRETTY_TIMESTAMP = f"{NOW.year}{NOW.month}{NOW.day}-{NOW.hour}{NOW.minute}{NOW.second}"
+PATH_TO_BOTS_RELATIVE = f"results\\{PRETTY_TIMESTAMP}\\bots"
 PATH_TO_BOTS = join(dirname(__file__), PATH_TO_BOTS_RELATIVE)
 
 BOT_LOCATIONS = [
@@ -46,6 +54,31 @@ def download_bots():
             print(ex)
 
 
+def upload_results(res):
+    scope = ["https://spreadsheets.google.com/feeds",
+             'https://www.googleapis.com/auth/spreadsheets',
+             "https://www.googleapis.com/auth/drive.file",
+             "https://www.googleapis.com/auth/drive"]
+    creds = ServiceAccountCredentials.from_json_keyfile_name(
+        "client_secret_tbk.json", scope)
+    client = gspread.authorize(creds)
+    spread = Spread('Poker Bot Wars 2.0', client=client,
+                    creds=creds, scope=scope)
+    # spreadsheet = client.open("Poker Bot Wars 2.0")
+    newsheetname = f"res-{PRETTY_TIMESTAMP}"
+    spread.df_to_sheet(
+        res,
+        index=True,
+        sheet=newsheetname,
+        start="A1"
+    )
+    main_sheet = spread.find_sheet("Main")
+    # Update A1 cell to force update the sheet
+    main_sheet.update("A1", "Updating data ...")
+    sleep(1.0)
+    main_sheet.update("A1", "")
+
+
 def main():
     # Plan:
     # Download all the bots (snapshot) into a folder (in results?) from either github or gist
@@ -78,8 +111,10 @@ def main():
 
     # run the tournament with them
     challenge.PARTICIPANTS = bots
-    challenge.main()
-    # TODO: make csv result/google drive
+    # challenge.TIMESTAMP = NOW
+    res = challenge.main()
+
+    upload_results(res)
 
 
 if __name__ == "__main__":

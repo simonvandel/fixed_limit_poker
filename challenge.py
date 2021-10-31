@@ -3,10 +3,11 @@ import math
 import multiprocessing as mp
 import queue
 import time
-import pandas as pd
 from random import randint
 
-from bots import PercentBot, CounterBot
+import pandas as pd
+
+from bots import CounterBot, PercentBot
 from environment.FixedLimitPoker import FixedLimitPoker
 
 PARTICIPANTS = [
@@ -18,6 +19,7 @@ PARTICIPANTS = [
 ]
 TOTAL_ROUNDS = 1000
 PROCESS_COUNT = mp.cpu_count() - 2
+TIMESTAMP = round(time.time())
 
 
 def play(jobQueue: mp.Queue, roundsPerRoom: int, stats):
@@ -42,11 +44,11 @@ def play(jobQueue: mp.Queue, roundsPerRoom: int, stats):
 
 
 def deduplicate_player_names():
-    for p in PARTICIPANTS:
+    for idx, p in enumerate(PARTICIPANTS):
         player_player_names = [n.name for n in PARTICIPANTS]
         while player_player_names.count(p.name) > 1:
             print(f"Renaming player '{p.name}'")
-            p.name += f"{randint(0, 9999)}".zfill(4)
+            p.name += f"-{idx}"
             player_player_names = [n.name for n in PARTICIPANTS]
 
 
@@ -94,10 +96,10 @@ def main():
     print(f"Using {PROCESS_COUNT} processes")
     print(f"--- {round(duration, 2)} seconds ---")
 
-    #timestamp = round(time.time())
-    # with open(f"./results/challenge-{timestamp}.csv", 'wb') as file:
-    #    res.to_csv(file)
-    #    print("Wrote to file ...")
+    # with open(f"./results/challenge-{TIMESTAMP}.csv", 'wb') as file:
+    #     res.to_csv(file)
+    #     print("Wrote to file ...")
+    return res
 
 
 if __name__ == '__main__':

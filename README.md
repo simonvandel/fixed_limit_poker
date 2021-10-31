@@ -24,13 +24,14 @@
   - [X] Hvis de tager for lang tid (1 sekund?)
 - [X] Reimplment scoreboard using Google docs
   - [X] Gather results (in observer?) 
-  - [ ] Upload raw data to Google sheets
-  - [ ] Make Google Sheet that displays data in a pretty way
+  - [X] Upload raw data to Google sheets
+  - [X] Make Google Sheet that displays data in a pretty way
 
 Nice to have:
 
 - [X] løbende turneringer
-  - [X] GitHub gist?
+  - [X] GitHub gist
+  - [X] GitHub repo
 
 
 

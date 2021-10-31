@@ -1,6 +1,7 @@
-from bots import PercentBot, CounterBot
+from bots import CounterBot, PercentBot
 from environment.FixedLimitPoker import FixedLimitPoker
 from environment.observers.JsonObserver import JsonObserver
+
 
 def main():
     obs = JsonObserver()
