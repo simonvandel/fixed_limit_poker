@@ -4,6 +4,7 @@ import multiprocessing as mp
 import queue
 import time
 import pandas as pd
+from random import randint
 
 from bots import PercentBot, CounterBot
 from environment.FixedLimitPoker import FixedLimitPoker
@@ -40,7 +41,17 @@ def play(jobQueue: mp.Queue, roundsPerRoom: int, stats):
             stats[k2] += p2.reward
 
 
+def deduplicate_player_names():
+    for p in PARTICIPANTS:
+        player_player_names = [n.name for n in PARTICIPANTS]
+        while player_player_names.count(p.name) > 1:
+            print(f"Renaming player '{p.name}'")
+            p.name += f"{randint(0, 9999)}".zfill(4)
+            player_player_names = [n.name for n in PARTICIPANTS]
+
+
 def main():
+    deduplicate_player_names()
     combinations = list(itertools.combinations(PARTICIPANTS, 2))
     rounds_for_each_pair = math.floor(TOTAL_ROUNDS / len(combinations))
 
