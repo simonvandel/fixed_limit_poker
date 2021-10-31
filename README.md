@@ -6,7 +6,7 @@
   - [ ]  slider for hænder i kamp
   - [ ]  vis action som skrift på avatar
   - [ ]  vis score for kamp
-  - [ ]  vis hænd typer ved showdown
+  - [ ]  vis hånd typer ved showdown
   - [ ]  vis chips vundet ved showdown
 - [X] Lav UI Data
   - [X] JSON kamp data 
