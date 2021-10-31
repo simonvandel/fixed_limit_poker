@@ -3,7 +3,7 @@
   - [X] Tilføj Websocket observer - Troels
 - [X] Tilføj tests - Bovle
 - [ ] Lav UI - Harder
-  - [ ]  slider for hænder i kamp
+  - [x]  slider for hænder i kamp
   - [ ]  vis action som skrift på avatar
   - [ ]  vis score for kamp
   - [ ]  vis hånd typer ved showdown
