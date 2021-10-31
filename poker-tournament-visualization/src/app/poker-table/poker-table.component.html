@@ -7,12 +7,16 @@
             <app-poker-player [player]="player1" [imgurl]="player1link" [side]="'left'" [playerState]="player1Playerstate"></app-poker-player>
           </div>
           <div class="community">
+            <div class="pot">
+              <label>{{pot}}</label>
+              <app-stacker [valor]="pot"></app-stacker>
+            </div>
             <app-card-group [cards]="community" [overlap]="true"></app-card-group>
           </div>
           <div class="player right">
             <app-poker-player [player]="player2" [imgurl]="player2link" [side]="'right'" [playerState]="player2Playerstate"></app-poker-player>
           </div>
-          <label class="pot">{{pot}}</label>
+          
           <!--<app-stacker [valor]="pot"></app-stacker>-->
         </div>
       </div>

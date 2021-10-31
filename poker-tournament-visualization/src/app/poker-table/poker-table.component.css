@@ -104,15 +104,7 @@ app-dual-stack {
   text-shadow: 0px 0px 1px #ffffff36;
 }
 
-.pot {
-  position: absolute;
-  top: 10%;
-  left: calc(50% - 100px);
-  width: 200px;
-  text-align: center;
-  color: #fde9ba;
-  text-shadow: 1px 1px 0px black;
-}
+
 
 .player {
   display: inline-flex;
@@ -128,13 +120,31 @@ app-dual-stack {
 
 .community {
   display: inline-flex;
-  margin-top: calc(140px);
   flex-grow: 1;
   text-align: center;
+  flex-direction: column;
+}
+
+.community .pot {
+  text-align: center;
+  color: #fde9ba;
+  text-shadow: 1px 1px 0px black;
+  height: 50%;
+}
+
+.community .pot label{
+  position: absolute;
+  left: 45%;
+}
+
+.community .pot app-stacker{
+  position: absolute;
+  right: 45%;
 }
 
 .community app-card-group {
   width: 100%;
+  height: 50%;
 }
 
 .right app-poker-player .background {
