@@ -118,3 +118,5 @@ results/*.csv
 
 node_modules
 results/**/*.py
+
+client_secret*.json
