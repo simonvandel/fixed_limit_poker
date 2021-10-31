@@ -5,10 +5,27 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "type": "firefox",
+            "request": "launch",
+            "reAttach": true,
+            "name": "Debug poker-tournament-visualization in Firefox",
+            "url": "http://localhost:4200/",
+            "webRoot": "${workspaceFolder}//poker-tournament-visualization"
+        },
+        {
+            "command": "npm start",
+            "name": "Start poker-tournament-visualization",
+            "request": "launch",
+            "type": "node-terminal",
+            "cwd": "${workspaceFolder}/poker-tournament-visualization"
+        },
+        {
             "name": "Python: tests",
             "type": "python",
             "request": "launch",
-            "purpose": ["debug-test"],
+            "purpose": [
+                "debug-test"
+            ],
             "program": "${file}",
             "console": "integratedTerminal"
         },
