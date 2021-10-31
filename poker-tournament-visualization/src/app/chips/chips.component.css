@@ -10,8 +10,7 @@
 .sizeFixed {
     transform: scale(0.2);
     transform-origin: 0 0;
-}
-  
+}  
   .chip .whiteBand {
       position: absolute;
       background: #d6d6d6;
