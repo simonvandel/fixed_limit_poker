@@ -117,3 +117,4 @@ results/*.pckl
 results/*.csv
 
 node_modules
+results/**/*.py
