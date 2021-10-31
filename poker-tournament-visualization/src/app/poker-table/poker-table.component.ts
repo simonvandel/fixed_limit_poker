@@ -18,8 +18,8 @@ export class PokerTableComponent implements OnInit, OnChanges {
 
   player1!: Player;
   player2!: Player;
-  player1Playerstate: PlayerState = {chips_wagered: 0, stack: 1000};
-  player2Playerstate: PlayerState= {chips_wagered: 0, stack: 1000};
+  player1Playerstate: PlayerState = {chips_wagered: 0, stack: 1000, next_to_act: false};
+  player2Playerstate: PlayerState= {chips_wagered: 0, stack: 1000, next_to_act: false};
   player1link="https://media-exp1.licdn.com/dms/image/C5603AQGAUW9uU9JtGw/profile-displayphoto-shrink_200_200/0/1581669563810?e=1640217600&v=beta&t=WHteJ76sNXQZ9l6yySjTvMNTyExfgZtYPa5WRIctkyk"
   player2link="https://media-exp1.licdn.com/dms/image/C5603AQHxqi2EjCLiKQ/profile-displayphoto-shrink_200_200/0/1580829910259?e=1640217600&v=beta&t=6Ry0x-EzdCjOmgaIcXGoO4jrZv7Uh2ROx2ymfOr3ag4"
   pot = 0
@@ -53,7 +53,7 @@ export class PokerTableComponent implements OnInit, OnChanges {
   }
 
   setPlayerState(player: string): PlayerState{
-    let playerstate: PlayerState = {stack: 0, chips_wagered: 0};
+    let playerstate: PlayerState = {stack: 0, chips_wagered: 0, next_to_act: false};
     for (let index = 0; index <= this.step; index++) {
       const history = this.history[index];
       if(history.player == player){
@@ -64,6 +64,9 @@ export class PokerTableComponent implements OnInit, OnChanges {
         playerstate.chips_wagered = 0
       }
     }  
+    if (this.history.length - 1  > this.step + 1 && this.history[this.step+1].player == player){
+      playerstate.next_to_act = true
+    }
     return playerstate;    
   }
 

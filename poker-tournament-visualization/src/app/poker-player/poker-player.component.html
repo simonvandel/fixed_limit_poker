@@ -2,7 +2,7 @@
 
     <p class="name">{{player.name}}</p>
     <div class="background">
-        <div class="head">
+        <div class="head" [ngClass]="{'glow' : playerState.next_to_act}">
             <img [src]="imgurl">
         </div>
         <label class="chips">{{playerState.chips_wagered}}</label>
