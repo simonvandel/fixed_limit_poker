@@ -1,14 +1,14 @@
 <div class="chip"
-  [class.one]="valor=='5'"
-  [class.gray]="valor=='10'"
+  [class.pink]="valor=='5'"
+  [class.yellow]="valor=='10'"
   [class.brown]="valor=='25'"
   [class.orange]="valor=='50'"
   [class.red]="valor=='100'"
   [class.blue]="valor=='250'"
   [class.green]="valor=='500'"
   [class.purple]="valor=='1K'"
-  [class.pink]="valor=='2K'"
-  [class.yellow]="valor=='5K'"
+  [class.one]="valor=='2K'"
+  [class.gray]="valor=='5K'"
   [class.K10]="valor=='10K'"
   [class.K25]="valor=='25K'"
   [class.K50]="valor=='50K'"
@@ -25,21 +25,21 @@
   <div class="whiteBand b"></div>
   <div class="whiteBand c"></div>
   <div class="internalBand">
-      <div class="curved topText">
+      <!--<div class="curved topText">
         <span>N</span><span>C</span><span>P</span><span>O</span><span>K</span><span>E</span><span>R</span>
-      </div>
+      </div>-->
       <div class="internalCircle">
           <div class="subCircle">
               <div class="finalCircle">
-                  <div class="topIcons"></div>
+                  <!--<div class="topIcons"></div>
                   <div class="value">{{valor}}</div>
-                  <div class="botIcons"></div>
+                  <div class="botIcons"></div>-->
               </div>
           </div>
       </div>
-      <div class="curved botText" *ngIf="valor!='1M' && valor!='5M' && valor!='10M'">
+      <!--<div class="curved botText" *ngIf="valor!='1M' && valor!='5M' && valor!='10M'">
           <span>N</span><span>C</span><span>P</span><span>O</span><span>K</span><span>E</span><span>R</span>
-      </div>
+      </div>-->
       <div class="dedicatedNiko" *ngIf="valor=='1M'">
         <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="50px" height="50px" version="1.1" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
         viewBox="0 0 29700 21000"

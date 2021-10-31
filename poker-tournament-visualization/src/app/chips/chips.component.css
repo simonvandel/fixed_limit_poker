@@ -1,6 +1,6 @@
 .chip {
-    width: 150px;
-    height: 150px;
+    width: 50px;
+    height: 50px;
     background: #070513;
     border-radius: 50%;
     position: relative;
@@ -53,7 +53,7 @@
       left: 7%;
       background: #141415;
       border-radius: 50%;
-      z-index: 1;
+      /*z-index: 1;*/
       position: absolute;
       box-shadow: inset 0px 0px 5px black;
   }
@@ -703,9 +703,9 @@
       color: #272727;
       bottom: 45px;
   }
-  .chip.M1 .internalBand .internalCircle {
+  /*.chip.M1 .internalBand .internalCircle {
       z-index: 1;
-  }
+  }*/
   /** END M1 **/
   
   /** M5 **/
@@ -766,9 +766,9 @@
       color: #1a0514;
       bottom: 0px;
   }
-  .chip.M5 .internalBand .internalCircle {
+  /*.chip.M5 .internalBand .internalCircle {
       z-index: 1;
-  }
+  }*/
   /** END M5 **/
   
   /** CHIP M10 **/

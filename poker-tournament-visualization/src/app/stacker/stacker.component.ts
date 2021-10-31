@@ -198,14 +198,14 @@ export class StackerComponent implements OnInit, OnChanges {
       fichas = fichas % 50;
     }
 
-    const v25 = fichas / 25;
+    /*const v25 = fichas / 25;
     if (v25 >= 1) {
       const cant = Math.floor(v25);
       for (let i = 0; i < cant; i++) {
         chipsToStack.unshift('25');
       }
       fichas = fichas % 25;
-    }
+    }*/
 
     const v10 = fichas / 10;
     if (v10 >= 1) {
@@ -233,7 +233,7 @@ export class StackerComponent implements OnInit, OnChanges {
         chipsToStack.unshift('1');
       }
     }
-    // console.log('Real stacked chips', chipsToStack);
+    console.log('Real stacked chips', chipsToStack);
     this.chipsStacked = chipsToStack.slice(chipsToStack.length - 25, chipsToStack.length);
   }
 

@@ -1,9 +1,10 @@
 .stack {
-    display: inline-block;
+    display: flex;
+    flex-direction: column;
 }
 
 .chip {
-    width: 120%;
+    margin-bottom: -100%;
 }
 
 .chip:first-child {
