@@ -11,7 +11,7 @@ export class PokerGameComponent implements OnInit, OnChanges {
   game: PokerGame;
   stage: Stage;
   actionSlider: number = 0;
-  hand: number = 1;
+  hand: number = 0;
 
   constructor(private pokerGameService: PokerGameService) {
     this.game = this.pokerGameService.game[0];
@@ -59,6 +59,15 @@ export class PokerGameComponent implements OnInit, OnChanges {
 
   sliderOnChange(event: any) {
     this.setStage(event.value)
+  }
+
+  getMaxHands(): number {
+    const hands = this.game.hands.length-1;
+    return hands; // +1 for the show-down
+  }
+  handSliderOnChange(event: any) {
+    this.hand = event.value;
+    this.actionSlider = 0;
   }
 }
 
