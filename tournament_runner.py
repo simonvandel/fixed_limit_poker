@@ -11,7 +11,6 @@ now = datetime.now()
 PATH_TO_BOTS_RELATIVE = f"results\\{now.year}{now.month}{now.day}-{now.hour}{now.minute}{now.second}\\bots"
 PATH_TO_BOTS = join(dirname(__file__), PATH_TO_BOTS_RELATIVE)
 
-# Filename MUST match the class name exactly for this to work.
 BOT_LOCATIONS = [
     "https://raw.githubusercontent.com/bovle/fixed_limit_poker/main/bots/RandomBot.py",
     "https://raw.githubusercontent.com/bovle/fixed_limit_poker/main/bots/RandomBot.py",
@@ -33,7 +32,6 @@ def download_bots():
 
                 # Write snapshot of bot to file:
                 bot_name = b.split("/")[-1]
-                # TODO: Handle conflicts
                 filepath = join(PATH_TO_BOTS, bot_name)
                 while exists(filepath):
                     oldpath = filepath
