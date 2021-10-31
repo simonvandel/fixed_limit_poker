@@ -3,29 +3,32 @@
   - [X] Tilføj Websocket observer - Troels
 - [X] Tilføj tests - Bovle
 - [ ] Lav UI - Harder
-- [ ] Lav UI Data
-  - [ ] JSON kamp data 
-- [ ] Hjælp til bot udvikling
+  - [ ]  slider for hænder i kamp
+  - [ ]  vis action som skrift på avatar
+  - [ ]  vis score for kamp
+  - [ ]  vis hænd typer ved showdown
+  - [ ]  vis chips vundet ved showdown
+- [X] Lav UI Data
+  - [X] JSON kamp data 
+- [X] Hjælp til bot udvikling
   - [X] preflop hånd rang 
   - [X] postflop hånd rang
-  - [ ] Bedre bot eksempler
+  - [X] Bedre bot eksempler
 - [X] Håndter multiple kampe samtidig
   - [X] Spil N bots mod hinanden alle mod alle
   - [X] Gem resultat som matchup tabel
-- [ ] Fejlhåndtering
+- [X] Fejlhåndtering
   - [X] Hvis de crasher
-  - [ ] Hvis de tager for lang tid (1 sekund?)
-- [ ] Reimplment scoreboard using Google docs
-  - [ ] Gather results (in observer?) 
+  - [X] Hvis de tager for lang tid (1 sekund?)
+- [X] Reimplment scoreboard using Google docs
+  - [X] Gather results (in observer?) 
   - [ ] Upload raw data to Google sheets
   - [ ] Make Google Sheet that displays data in a pretty way
 
 Nice to have:
 
-- [ ] løbende turneringer
-  - [ ] Hvordan får vi deres kode?
-    - [ ] GitHub gist?
-    - [ ] Github Repo?
+- [X] løbende turneringer
+  - [X] GitHub gist?
 
 
 
