@@ -8,7 +8,8 @@
   - [ ]  vis score for kamp
   - [ ]  vis hånd typer ved showdown
   - [ ]  vis chips vundet ved showdown
-  - [ ]  fix state 0 og slider ændringer korrekt
+  - [ ]  fix state 0
+  - [x]  slider ændringer korrekt
 - [X] Lav UI Data
   - [X] JSON kamp data 
 - [X] Hjælp til bot udvikling
