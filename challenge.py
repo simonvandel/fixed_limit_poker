@@ -6,18 +6,16 @@ import time
 from random import randint
 
 import pandas as pd
-
+from bots.SimonBot import SimonBot
 from bots import CounterBot, PercentBot
 from environment.FixedLimitPoker import FixedLimitPoker
 
 PARTICIPANTS = [
     CounterBot("Counter"),
-    CounterBot("Counter-Strike"),
     PercentBot("Free"),
-    PercentBot("Guy"),
-    PercentBot("Percent"),
+    SimonBot("Simon"),
 ]
-TOTAL_ROUNDS = 1000
+TOTAL_ROUNDS = 10000
 PROCESS_COUNT = mp.cpu_count() - 2
 TIMESTAMP = round(time.time())
 
