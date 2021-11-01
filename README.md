@@ -53,7 +53,7 @@ Todo liste
 - [ ] Check/fold
 - [ ] Forklar handValue utils.
 - [ ] Template bot som de kan starte med (tom implementation)
-- [ ] 
+- [ ] LoggingObserver: print win-chance for hver hånd ved hver stage
 
 Nice to have:
 
