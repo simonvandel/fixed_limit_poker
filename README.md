@@ -1,3 +1,26 @@
+Getting started
+===============
+1. Fork this repository on Github and continue from there.
+
+Setup
+=====
+
+To setup your environment do the following:
+1. Download python3 for your os
+2. Create a virtual environment: `python -m venv venv`
+3. Use that environment: `venv\Scripts\activate`
+4. Install the project dependencies: `pip install -r requirements.txt`
+
+Developing your bot
+===================
+1. In the `bots` folder, create a file with the name of your bot i.e. `ChallengerBot.py`
+2. Copy the contents from `EmptyBot.py` into it
+
+
+
+
+Todo liste
+==========
 - [X] Tilføj oberserver pattern - Troels
   - [X] Tilføj console observer - Troels
   - [X] Tilføj Websocket observer - Troels
@@ -26,6 +49,11 @@
   - [X] Gather results (in observer?) 
   - [X] Upload raw data to Google sheets
   - [X] Make Google Sheet that displays data in a pretty way
+- [ ] Refactor Call and Check into CALL_CHECK
+- [ ] Check/fold
+- [ ] Forklar handValue utils.
+- [ ] Template bot som de kan starte med (tom implementation)
+- [ ] 
 
 Nice to have:
 
@@ -43,3 +71,4 @@ Challenge:
 
 Sort dependencies:
  - `isort -l 120 bots environment utils main.py read_results.py challenge.py`
+ 

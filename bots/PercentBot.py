@@ -55,9 +55,9 @@ class PercentBot(BotInterface):
     def handleRiver(self, observation: Observation) -> Action:
         handPercent, cards = getHandPercent(
             observation.myHand, observation.boardCards)
-        if handPercent <= 40:
+        if handPercent <= .40:
             return Action.RAISE
-        elif handPercent <= 60:
+        elif handPercent <= .60:
             return Action.CALL
         return Action.FOLD
 
